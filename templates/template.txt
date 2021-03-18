@@ -1,0 +1,162 @@
+%%%%%%%%%%%%%%%%%
+% This is an example CV created using altacv.cls (v1.3, 10 May 2020) written by
+% LianTze Lim (liantze@gmail.com), based on the
+% Cv created by BusinessInsider at http://www.businessinsider.my/a-sample-resume-for-marissa-mayer-2016-7/?r=US&IR=T
+%
+%% It may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%%%%%%%%%%%%%%%%
+
+%% If you are using \orcid or academicons
+%% icons, make sure you have the academicons
+%% option here, and compile with XeLaTeX
+%% or LuaLaTeX.
+% \documentclass[10pt,a4paper,academicons]{altacv}
+
+%% Use the "normalphoto" option if you want a normal photo instead of cropped to a circle
+% \documentclass[10pt,a4paper,normalphoto]{altacv}
+\documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
+
+%% AltaCV uses the fontawesome5 and academicon fonts
+%% and packages.
+%% See http://texdoc.net/pkg/fontawesome5 and http://texdoc.net/pkg/academicons for full list of symbols. You MUST compile with XeLaTeX or LuaLaTeX if you want to use academicons.
+
+% Change the page layout if you need to
+\geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
+
+% The paracol package lets you typeset columns of text in parallel
+\usepackage{paracol}
+
+
+% Change the font if you want to, depending on whether
+% you're using pdflatex or xelatex/lualatex
+\ifxetexorluatex
+  % If using xelatex or lualatex:
+  \setmainfont{Lato}
+\else
+  % If using pdflatex:
+  \usepackage[default]{lato}
+\fi
+
+% Change the colours if you want to
+\definecolor{VividPurple}{HTML}{3E0097}
+\definecolor{SlateGrey}{HTML}{2E2E2E}
+\definecolor{LightGrey}{HTML}{666666}
+% \colorlet{name}{black}
+\colorlet{tagline}{VividPurple}
+\colorlet{heading}{VividPurple}
+\colorlet{headingrule}{VividPurple}
+% \colorlet{subheading}{PastelRed}
+\colorlet{accent}{VividPurple}
+\colorlet{emphasis}{SlateGrey}
+\colorlet{body}{LightGrey}
+
+% Change some fonts, if necessary
+% \renewcommand{\namefont}{\Huge\rmfamily\bfseries}
+% \renewcommand{\personalinfofont}{\footnotesize}
+% \renewcommand{\cvsectionfont}{\LARGE\rmfamily\bfseries}
+% \renewcommand{\cvsubsectionfont}{\large\bfseries}
+
+% Change the bullets for itemize and rating marker
+% for \cvskill if you want to
+\renewcommand{\itemmarker}{{"{"}}{{"{"}}\small\textbullet{{"}"}}{{"}"}}
+\renewcommand{\ratingmarker}{\faCircle}
+\begin{document}
+\name{{"{"}}{{.PersonalInfo.Name}}{{"}"}}
+\tagline{{"{"}}{{.PersonalInfo.Headline}}{{"}"}}
+% Cropped to square from https://en.wikipedia.org/wiki/Marissa_Mayer#/media/File:Marissa_Mayer_May_2014_(cropped).jpg, CC-BY 2.0
+%% You can add multiple photos on the left or right
+{{if .PersonalInfo.Picture}}
+  \photoR{3cm}{{"{"}}{{.PersonalInfo.Picture}}{{"}"}}
+{{end}}
+% \photoL{2cm}{Yacht_High,Suitcase_High}
+\personalinfo{%
+  % Not all of these are required!
+  % You can add your own with \printinfo{symbol}{detail}
+  \email{{"{"}}{{.PersonalInfo.Email}}{{"}"}}
+  \phone{{"{"}}{{.PersonalInfo.Phone}}{{"}"}}
+  \mailaddress{{"{"}}{{.PersonalInfo.Location1}}{{"}"}}
+  \location{{"{"}}{{.PersonalInfo.Location2}}{{"}"}}
+  {{if .PersonalInfo.Twitter}}
+  \twitter{{"{"}}{{.PersonalInfo.Twitter}}{{"}"}}
+  {{end}}
+  {{if .PersonalInfo.Linkedin}}
+  \linkedin{{"{"}}{{.PersonalInfo.Linkedin}}{{"}"}}
+  {{end}}
+  {{if .PersonalInfo.Github}}
+  \github{{"{"}}{{.PersonalInfo.Github}}{{"}"}} % I'm just making this up though.
+  {{end}}
+%   \orcid{orcid.org/0000-0000-0000-0000} % Obviously making this up too. If you want to use this field (and also other academicons symbols), add "academicons" option to \documentclass{altacv}
+  %% You MUST add the academicons option to \documentclass, then compile with LuaLaTeX or XeLaTeX, if you want to use \orcid or other academicons commands.
+  % \orcid{0000-0000-0000-0000}
+  %% You can add your own arbtrary detail with
+  %% \printinfo{symbol}{detail}[optional hyperlink prefix]
+  % \printinfo{\faPaw}{Hey ho!}
+  %% Or you can declare your own field with
+  %% \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
+  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+  % \gitlab{your_id}
+}
+
+\makecvheader
+
+%% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
+\AtBeginEnvironment{itemize}{\small}
+
+%% Set the left/right column width ratio to 6:4.
+\columnratio{0.6}
+
+% Start a 2-column paracol. Both the left and right columns will automatically
+% break across pages if things get too long.
+\begin{paracol}{2}
+
+\cvsection{{"{"}}{{.MainSection.WorkExperience.Label}}{{"}"}}
+{{range $i, $it := .MainSection.WorkExperience.Lists}}
+{{if $i}}
+\divider
+{{end}}
+\cvevent{{"{"}}{{.Position}}{{"}"}}{{"{"}}{{.Company}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\begin{itemize}
+{{range $it.Descriptions}}
+\item {{.}}
+{{end}}
+\end{itemize}
+{{end}}
+
+\cvsection{{"{"}}{{.MainSection.Education.Label}}{{"}"}}
+{{range $i, $it := .MainSection.Education.Lists}}
+{{if $i}}
+\divider
+{{end}}
+\cvevent{{"{"}}{{.Level}}, {{.Major}} {{if .Gpa}}, {{.Gpa}}{{end}}{{"}"}}{{"{"}}{{.Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\begin{itemize}
+{{range .Descriptions}}
+\item {{.}}
+{{end}}
+\end{itemize}
+{{end}}
+
+\switchcolumn
+\cvsection{{"{"}}{{.MainSection.AboutMe.Label}}{{"}"}}
+\begin{quote}
+  {{.MainSection.AboutMe.Descriptions}}
+\end{quote}
+
+\cvsection{{"{"}}{{.MainSection.Skills.Label}}{{"}"}}
+{{- range .MainSection.Skills.Descriptions}}
+\cvtag{{"{"}}{{. -}}{{"}"}}
+{{- end}}
+
+\cvsection{{"{"}}{{.MainSection.Languages.Label}}{{"}"}}
+{{range .MainSection.Languages.Descriptions}}
+\cvskill{{"{"}}{{.Language}}{{"}"}}{{"{"}}{{.Fluency}}{{"}"}}
+{{end}}
+
+\end{paracol}
+
+\end{document}
