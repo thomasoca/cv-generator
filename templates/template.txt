@@ -78,19 +78,27 @@
 \personalinfo{%
   % Not all of these are required!
   % You can add your own with \printinfo{symbol}{detail}
+  {{- if .PersonalInfo.Email}}
   \email{{"{"}}{{.PersonalInfo.Email}}{{"}"}}
+  {{- end}}
+  {{- if .PersonalInfo.Phone}}
   \phone{{"{"}}{{.PersonalInfo.Phone}}{{"}"}}
+  {{- end}}
+  {{- if .PersonalInfo.Location1}}
   \mailaddress{{"{"}}{{.PersonalInfo.Location1}}{{"}"}}
+  {{- end}}
+  {{- if .PersonalInfo.Location2}}
   \location{{"{"}}{{.PersonalInfo.Location2}}{{"}"}}
-  {{if .PersonalInfo.Twitter}}
+  {{- end}}
+  {{- if .PersonalInfo.Twitter}}
   \twitter{{"{"}}{{.PersonalInfo.Twitter}}{{"}"}}
-  {{end}}
-  {{if .PersonalInfo.Linkedin}}
+  {{- end}}
+  {{- if .PersonalInfo.Linkedin}}
   \linkedin{{"{"}}{{.PersonalInfo.Linkedin}}{{"}"}}
-  {{end}}
-  {{if .PersonalInfo.Github}}
+  {{- end}}
+  {{- if .PersonalInfo.Github}}
   \github{{"{"}}{{.PersonalInfo.Github}}{{"}"}} % I'm just making this up though.
-  {{end}}
+  {{- end}}
 %   \orcid{orcid.org/0000-0000-0000-0000} % Obviously making this up too. If you want to use this field (and also other academicons symbols), add "academicons" option to \documentclass{altacv}
   %% You MUST add the academicons option to \documentclass, then compile with LuaLaTeX or XeLaTeX, if you want to use \orcid or other academicons commands.
   % \orcid{0000-0000-0000-0000}
@@ -133,7 +141,7 @@
 {{if $i}}
 \divider
 {{end}}
-\cvevent{{"{"}}{{.Level}}, {{.Major}} {{if .Gpa}}, {{.Gpa}}{{end}}{{"}"}}{{"{"}}{{.Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\cvevent{{"{"}}{{.Level}}, {{.Major}}{{if .Gpa}}, {{.Gpa}}{{end}}{{"}"}}{{"{"}}{{.Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
 \begin{itemize}
 {{range .Descriptions}}
 \item {{.}}
