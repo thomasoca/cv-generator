@@ -8,7 +8,6 @@ import (
 	_ "image/jpeg"
 	_ "image/png"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -49,21 +48,19 @@ func imageFromBase64(data string, dirName string) (string, error) {
 
 	m, _, err := image.Decode(reader)
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
 
 	//Encode from image format to writer
 	imageName := filepath.Join(dirName, "image.jpg")
 	f, err := os.OpenFile(imageName, os.O_WRONLY|os.O_CREATE, 0777)
 	if err != nil {
-		log.Fatal(err)
-
+		return "", err
 	}
 
 	err = jpeg.Encode(f, m, &jpeg.Options{Quality: 75})
 	if err != nil {
-		log.Fatal(err)
-
+		return "", err
 	}
 	return imageName, err
 }
