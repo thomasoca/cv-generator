@@ -29,10 +29,19 @@ func IsUrl(str string) bool {
 
 func (u *User) Modify(dirname string) error {
 	imageData := u.PersonalInfo.Picture
-	var newImage string
-	checkUrl := IsUrl(imageData)
-	if checkUrl {
-		newImage, err := imageFromUrl(imageData, dirname)
+	if imageData != "" {
+		var newImage string
+		checkUrl := IsUrl(imageData)
+		if checkUrl {
+			newImage, err := imageFromUrl(imageData, dirname)
+			if err != nil {
+				return err
+			}
+			u.PersonalInfo.Picture = newImage
+			return err
+		}
+
+		newImage, err := imageFromBase64(imageData, dirname)
 		if err != nil {
 			return err
 		}
@@ -40,24 +49,19 @@ func (u *User) Modify(dirname string) error {
 		return err
 	}
 
-	newImage, err := imageFromBase64(imageData, dirname)
-	if err != nil {
-		return err
-	}
-	u.PersonalInfo.Picture = newImage
-	return err
-
+	return nil
 }
 
 func createFile(user User) (string, error) {
 	rand.Seed(time.Now().UnixNano())
-	tpl, err := template.ParseFiles("templates/template.txt")
+	templatePath := os.Getenv("PROJECT_DIR") + "/templates/template.txt"
+	tpl, err := template.ParseFiles(templatePath)
 	if err != nil {
 		return "", err
 	}
 	// Create the file
 	randomFname := randSeq(10)
-	dname, err := ioutil.TempDir("", "sampledir")
+	dname, err := ioutil.TempDir("", "tempdir")
 	filename := filepath.Join(dname, randomFname+".tex")
 	pdfname := filepath.Join(dname, randomFname+".pdf")
 
@@ -108,6 +112,8 @@ func generateLatex(dirname string, filename string) error {
 	app := "pdflatex"
 	outdir := "-output-directory=" + dirname
 	cmdArgs := []string{outdir, "-interaction=nonstopmode", "-synctex=1", "-halt-on-error", filename}
+	// for debug locally or in docker
+	// cmdArgs := []string{"-interaction=nonstopmode", "-synctex=1", "-halt-on-error", filename}
 
 	cmd := exec.Command(app, cmdArgs...)
 	err := cmd.Run()
