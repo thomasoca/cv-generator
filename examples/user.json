@@ -1,0 +1,115 @@
+{
+    "personal_info": {
+        "name": "Jane Doe",
+        "headline": "Software Engineer",
+        "picture": "",
+        "email": "jane.doe@email.com",
+        "phone": "+60010101010",
+        "github": "https://github.com/",
+        "linkedin": "Jane Doe",
+        "twitter": "",
+        "location_1": "Mansion",
+        "location_2": "City state"
+    },
+    "main_section": {
+        "about_me": {
+            "label": "About Me",
+            "descriptions": "A human"
+        },
+        "work_experience": {
+            "label": "Experience",
+            "lists": [
+                {
+                    "company": "Mature Start-up",
+                    "position": "CEO",
+                    "start_period": "2015",
+                    "end_period": "now",
+                    "location": "City 2, XY",
+                    "descriptions": [
+                        "Launching stable product",
+                        "Make profit",
+                        "IPO on 2020",
+                        "Reach 100k users"
+                    ]
+                },
+                {
+                    "company": "Start-up",
+                    "position": "CTO",
+                    "start_period": "2013",
+                    "end_period": "2015",
+                    "location": "City 2, XY",
+                    "descriptions": [
+                        "Started the company",
+                        "Launch Beta version on 2015"
+                    ]
+                },
+                {
+                    "company": "A Corporation",
+                    "position": "Intern",
+                    "start_period": "2011",
+                    "end_period": "2012",
+                    "location": "City 1, XX",
+                    "descriptions": [
+                        "Working at the company",
+                        "Getting paid"
+                    ]
+                }
+            ]
+        },
+        "education": {
+            "label": "Education",
+            "lists": [
+                {
+                    "institution": "Graduate School",
+                    "major": "Computer Science",
+                    "level": "Master's degree",
+                    "gpa": "3.92",
+                    "start_period": "2010",
+                    "end_period": "2012",
+                    "location": "City 1, XX",
+                    "descriptions": [
+                        "Write thesis",
+                        "Graduate assistant"
+                    ]
+                },
+                {
+                    "institution": "University",
+                    "major": "Computer Science",
+                    "level": "Bachelor's degree",
+                    "gpa": "3.72",
+                    "start_period": "2006",
+                    "end_period": "2010",
+                    "location": "Palo Alto, CA",
+                    "descriptions": [
+                        "CompSci club",
+                        "Student union"
+                    ]
+                }
+            ]
+        },
+        "skills": {
+            "label": "Skills",
+            "descriptions": [
+                "HTML",
+                "CSS",
+                "Javascript",
+                "Python",
+                "Go",
+                "Software Engineering"
+            ]
+        },
+        "languages": {
+            "label": "Languages",
+            "descriptions": [
+                {
+                    "language": "English",
+                    "fluency": 5
+                },
+                {
+                    "language": "Japanese",
+                    "fluency": 4
+                }
+            ]
+        }
+    }
+}
