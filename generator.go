@@ -54,7 +54,15 @@ func (u *User) Modify(dirname string) error {
 
 func createFile(user User) (string, error) {
 	rand.Seed(time.Now().UnixNano())
-	templatePath := os.Getenv("PROJECT_DIR") + "/templates/template.txt"
+	path := os.Getenv("PROJECT_DIR")
+	if path == "" {
+		localPath, err := os.Getwd()
+		if err != nil {
+			log.Println(err)
+		}
+		path = localPath
+	}
+	templatePath := path + "/templates/template.txt"
 	tpl, err := template.ParseFiles(templatePath)
 	if err != nil {
 		return "", err
