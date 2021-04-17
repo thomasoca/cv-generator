@@ -129,11 +129,13 @@
 \divider
 {{end}}
 \cvevent{{"{"}}{{.Position}}{{"}"}}{{"{"}}{{.Company}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+{{if $it.Descriptions}}
 \begin{itemize}
 {{range $it.Descriptions}}
 \item {{.}}
 {{end}}
 \end{itemize}
+{{end}}
 {{end}}
 
 \cvsection{{"{"}}{{.MainSection.Education.Label}}{{"}"}}
@@ -142,11 +144,13 @@
 \divider
 {{end}}
 \cvevent{{"{"}}{{.Level}}, {{.Major}}{{if .Gpa}}, {{.Gpa}}{{end}}{{"}"}}{{"{"}}{{.Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+{{if $it.Descriptions}}
 \begin{itemize}
-{{range .Descriptions}}
+{{range $it.Descriptions}}
 \item {{.}}
 {{end}}
 \end{itemize}
+{{end}}
 {{end}}
 
 \switchcolumn
