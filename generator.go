@@ -67,11 +67,28 @@ func createFile(user User) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	// Create the file
-	randomFname := randSeq(10)
-	dname, err := ioutil.TempDir("", "tempdir")
-	filename := filepath.Join(dname, randomFname+".tex")
-	pdfname := filepath.Join(dname, randomFname+".pdf")
+	envMode := os.Getenv("ENV_MODE")
+	var fName, dname string
+	switch envMode {
+	case "PRD":
+		// Create the file on tempdir (for prd)
+		fName = randSeq(10)
+		randomTempDirName := randSeq(15)
+		dname, err = ioutil.TempDir("", randomTempDirName)
+		if err != nil {
+			return "", err
+		}
+	default:
+		err := os.Mkdir("test", 0755)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fName = "test"
+		dname = path + "/test"
+	}
+
+	filename := filepath.Join(dname, fName+".tex")
+	pdfname := filepath.Join(dname, fName+".pdf")
 
 	// Convert image
 	err = user.Modify(dname)
@@ -85,7 +102,6 @@ func createFile(user User) (string, error) {
 
 	f, err := os.Create(filename)
 	if err != nil {
-		log.Println(err)
 		e := os.RemoveAll(dname)
 		if e != nil {
 			return "", err
@@ -120,8 +136,6 @@ func generateLatex(dirname string, filename string) error {
 	app := "pdflatex"
 	outdir := "-output-directory=" + dirname
 	cmdArgs := []string{outdir, "-interaction=nonstopmode", "-synctex=1", "-halt-on-error", filename}
-	// for debug locally or in docker
-	// cmdArgs := []string{"-interaction=nonstopmode", "-synctex=1", "-halt-on-error", filename}
 
 	cmd := exec.Command(app, cmdArgs...)
 	err := cmd.Run()
