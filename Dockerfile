@@ -23,6 +23,7 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
 ENV PATH="${PATH}:/root/bin"
 RUN fmtutil-sys --all
 ENV PROJECT_DIR /app
+ENV ENV_MODE PRD
 WORKDIR /app
 # Download altacv class from the author github
 RUN wget -q "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"
