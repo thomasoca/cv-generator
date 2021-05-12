@@ -68,7 +68,7 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 		}
 	default:
 		w.Header().Set("Content-type", "application/json")
-		w.WriteHeader(http.StatusForbidden)
+		w.WriteHeader(http.StatusMethodNotAllowed)
 		w.Write([]byte(`{"message": "Method not allowed"}`))
 		return
 	}
@@ -77,5 +77,11 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/user", serveFile)
-	log.Fatal(http.ListenAndServe(":8080", nil))
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+		log.Printf("defaulting to port %s", port)
+	}
+
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
