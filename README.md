@@ -10,6 +10,10 @@ I used [Go template](https://golang.org/pkg/text/template/) to write Latex file 
 ## Modifications
 For the altacv class, I did not use the `pdfx` and `biblatex` package, as it caused error when installed using Docker.
 
+**(Update per AltaCV v1.5)**
+
+Package `pdfx` somehow needed in order to use withhyper option on the document. As the bug that causes `pdfx` package error still not resolved, I discard withhyper option from the document class for this release version.
+
 ## How to run locally (using Docker)
 1. Clone this repo using `git clone https://github.com/thomasoca/cv-generator.git`
 2. Install [Docker](https://docs.docker.com/get-docker/) on your local machine
