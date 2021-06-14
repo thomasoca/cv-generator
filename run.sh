@@ -7,3 +7,17 @@ declare -a StringArray=("pdfx" "biber" "bibhang" "biblabelsep" "pubtype" "bibset
 for val in ${StringArray[@]}; do
    sed -i "/\b$val\b/d" altacv.cls
 done
+
+# Add modification to altacv.cls
+cat <<EOT >> altacv.cls
+% Modification
+\newcommand{\cvproject}[3]{%
+  {\large\color{emphasis}#1\par}
+  \smallskip\normalsize
+  \ifstrequal{#2}{}{}{
+  \textbf{\color{accent}#2}\par
+  \smallskip}
+  \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\faCalendar~#3}}}%
+  \medskip\normalsize
+}
+EOT
