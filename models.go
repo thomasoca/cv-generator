@@ -43,10 +43,31 @@ type User struct {
 				Descriptions []string `json:"descriptions"`
 			} `json:"lists"`
 		} `json:"education"`
+		Extracurricular struct {
+			Label string `json:"label"`
+			Lists []struct {
+				Institution  string   `json:"institution"`
+				Position     string   `json:"position"`
+				StartPeriod  string   `json:"start_period"`
+				EndPeriod    string   `json:"end_period"`
+				Location     string   `json:"location"`
+				Descriptions []string `json:"descriptions"`
+			} `json:"lists"`
+		} `json:"extracurricular"`
 		Skills struct {
 			Label        string   `json:"label"`
 			Descriptions []string `json:"descriptions"`
 		} `json:"skills"`
+		Projects struct {
+			Label string `json:"label"`
+			Lists []struct {
+				Title        string `json:"title"`
+				Link         string `json:"link"`
+				StartPeriod  string `json:"start_period"`
+				EndPeriod    string `json:"end_period"`
+				Descriptions string `json:"descriptions"`
+			} `json:"lists"`
+		} `json:"projects"`
 		Languages struct {
 			Label        string `json:"label"`
 			Descriptions []struct {

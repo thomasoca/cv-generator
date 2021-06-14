@@ -154,11 +154,41 @@
 {{end}}
 {{end}}
 
+{{- if .MainSection.Extracurricular.Lists}}
+\cvsection{{"{"}}{{.MainSection.Extracurricular.Label}}{{"}"}}
+{{range $i, $it := .MainSection.Extracurricular.Lists}}
+{{if $i}}
+\divider
+{{end}}
+\cvevent{{"{"}}{{.Position}}{{"}"}}{{"{"}}{{.Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+{{if $it.Descriptions}}
+\begin{itemize}
+{{range $it.Descriptions}}
+\item {{.}}
+{{end}}
+\end{itemize}
+{{end}}
+{{end}}
+{{- end}}
+
 \switchcolumn
 \cvsection{{"{"}}{{.MainSection.AboutMe.Label}}{{"}"}}
 \begin{quote}
   {{.MainSection.AboutMe.Descriptions}}
 \end{quote}
+
+{{- if .MainSection.Projects.Lists}}
+\cvsection{{"{"}}{{.MainSection.Projects.Label}}{{"}"}}
+{{range $i, $it := .MainSection.Projects.Lists}}
+{{if $i}}
+\divider
+{{end}}
+\cvproject{{"{"}}{{.Title}}{{"}"}}{{"{"}}{{.Link}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}
+{{if $it.Descriptions}}
+{{$it.Descriptions}}
+{{end}}
+{{end}}
+{{- end}}
 
 \cvsection{{"{"}}{{.MainSection.Skills.Label}}{{"}"}}
 {{- range .MainSection.Skills.Descriptions}}
