@@ -63,8 +63,8 @@ You also can run the API directly using the terminal using `go run ./`, but make
                 "label": "Experience",
                 "lists": [
                     {
-                        "company": "[Name of the company: string; required]",
-                        "position": "[Position level: string; required]",
+                        "company": "[Name of the company: string]",
+                        "position": "[Position level: string]",
                         "start_period": "[Starting work date: string]",
                         "end_period": "[End work date: string]",
                         "location": "[company location: string]",
@@ -78,7 +78,7 @@ You also can run the API directly using the terminal using `go run ./`, but make
                     {
                         "institution": "[Name of the institution: string; required]",
                         "major": "[Major taken: string; required]",
-                        "level": "[Degree obtained: string]",
+                        "level": "[Degree obtained: string; required]",
                         "gpa": "[GPA: string]",
                         "start_period": "[Starting school date: string]",
                         "end_period": "[End school date: string]",
@@ -87,9 +87,34 @@ You also can run the API directly using the terminal using `go run ./`, but make
                     }
                 ]
             },
+            "extracurricular": {
+                "label": "Extra-curricular Activities",
+                "lists": [
+                    {
+                        "institution": "[Name of the institution: string]",
+                        "position": "[Position level: string]",
+                        "start_period": "[Starting work date: string]",
+                        "end_period": "[End work date: string]",
+                        "location": "[company location: string]",
+                        "descriptions": ["list of short description: string"]
+                    }
+                ]
+            },
             "skills": {
                 "label": "Skills",
                 "descriptions": ["list of skills: string"]
+            },
+            "projects":{
+                "label": "Projects",
+                "lists": [
+                    {
+                        "title": "[Name/title of the project: string]",
+                        "link": "[Public URL of the project: string]",
+                        "start_period": "[Starting work date: string]",
+                        "end_period": "[End work date: string]",
+                        "descriptions": "[Project description: string]"
+                    }
+                ]
             },
             "languages": {
                 "label": "Languages",

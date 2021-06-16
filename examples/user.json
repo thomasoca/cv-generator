@@ -4,7 +4,6 @@
         "headline": "Software Engineer",
         "picture": "",
         "email": "jane.doe@email.com",
-        "phone": "+60010101010",
         "github": "https://github.com/",
         "linkedin": "Jane Doe",
         "twitter": "",
@@ -14,7 +13,7 @@
     "main_section": {
         "about_me": {
             "label": "About Me",
-            "descriptions": "A human"
+            "descriptions": "An aspiring CEO and computer scientist. Love to combine many ideas on computer science and software engineering into a practical business product"
         },
         "work_experience": {
             "label": "Experience",
@@ -38,10 +37,7 @@
                     "start_period": "2013",
                     "end_period": "2015",
                     "location": "City 2, XY",
-                    "descriptions": [
-                        "Started the company",
-                        "Launch Beta version on 2015"
-                    ]
+                    "descriptions": []
                 },
                 {
                     "company": "A Corporation",
@@ -49,10 +45,7 @@
                     "start_period": "2011",
                     "end_period": "2012",
                     "location": "City 1, XX",
-                    "descriptions": [
-                        "Working at the company",
-                        "Getting paid"
-                    ]
+                    "descriptions": []
                 }
             ]
         },
@@ -87,6 +80,22 @@
                 }
             ]
         },
+        "extracurricular": {
+            "label": "Extra-curricular Activities",
+            "lists": [
+                {
+                    "institution": "Kids Can Code",
+                    "position": "Tutor",
+                    "start_period": "2012",
+                    "end_period": "now",
+                    "location": "City 2, XY",
+                    "descriptions": [
+                        "Volunteering by tutoring kids age 6-12",
+                        "Organize things"
+                    ]
+                }
+            ]
+        },
         "skills": {
             "label": "Skills",
             "descriptions": [
@@ -96,6 +105,25 @@
                 "Python",
                 "Go",
                 "Software Engineering"
+            ]
+        },
+        "projects": {
+            "label": "Projects",
+            "lists": [
+                {
+                    "title": "Personal Blog",
+                    "link": "janedoe.github.io",
+                    "start_period": "2012",
+                    "end_period": "now",
+                    "descriptions": "My personal blog, created using Typescript, React, and create-react-app. Deployed as a SPA on Github CDN."
+                },
+                {
+                    "title": "Kids Can Code Website",
+                    "link": "kidscancode.io",
+                    "start_period": "2013",
+                    "end_period": "now",
+                    "descriptions": "Kids Can Code website, created using Typescript, React, Go, and Postgresql. A full-stack website that handling the registration of Kids Can Code programming camp."
+                }
             ]
         },
         "languages": {
