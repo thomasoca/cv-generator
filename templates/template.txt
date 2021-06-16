@@ -122,7 +122,7 @@
 % break across pages if things get too long.
 \begin{paracol}{2}
 
-{{- if .MainSection.WorkExperience.Lists}}
+{{- if (index .MainSection.WorkExperience.Lists 0).Company}}
 \cvsection{{"{"}}{{.MainSection.WorkExperience.Label}}{{"}"}}
 {{range $i, $it := .MainSection.WorkExperience.Lists}}
 {{if $i}}
@@ -154,7 +154,7 @@
 {{end}}
 {{end}}
 
-{{- if .MainSection.Extracurricular.Lists}}
+{{- if (index .MainSection.Extracurricular.Lists 0).Institution}}
 \cvsection{{"{"}}{{.MainSection.Extracurricular.Label}}{{"}"}}
 {{range $i, $it := .MainSection.Extracurricular.Lists}}
 {{if $i}}
@@ -177,7 +177,7 @@
   {{.MainSection.AboutMe.Descriptions}}
 \end{quote}
 
-{{- if .MainSection.Projects.Lists}}
+{{- if (index .MainSection.Projects.Lists 0).Title}}
 \cvsection{{"{"}}{{.MainSection.Projects.Label}}{{"}"}}
 {{range $i, $it := .MainSection.Projects.Lists}}
 {{if $i}}
