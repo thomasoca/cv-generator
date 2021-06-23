@@ -81,7 +81,7 @@ func createFile(user User) (string, error) {
 	default:
 		err := os.Mkdir("test", 0755)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
 		}
 		fName = "test"
 		dname = path + "/test"

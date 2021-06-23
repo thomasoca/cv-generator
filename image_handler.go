@@ -58,7 +58,7 @@ func imageWriter(imageData image.Image, dirName string, extension string) (strin
 }
 
 func imageFromBase64(data string, dirName string) (string, error) {
-	coI := strings.Index(string(data), ",")
+	coI := strings.Index(data, ",")
 	rawImage := string(data)[coI+1:]
 	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(rawImage))
 

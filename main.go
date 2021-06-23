@@ -29,7 +29,10 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-type", "application/json")
 			log.Println(err)
 			w.WriteHeader(http.StatusBadRequest)
-			w.Write([]byte(`{"message": "Bad request"}`))
+			_, err = w.Write([]byte(`{"message": "Bad request"}`))
+			if err != nil {
+				log.Panic(err)
+			}
 			return
 		}
 		fname, err := createFile(user)
@@ -37,7 +40,10 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-type", "application/json")
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(`{"message": "Failed creating file"}`))
+			_, err = w.Write([]byte(`{"message": "Failed creating file"}`))
+			if err != nil {
+				log.Panic(err)
+			}
 			return
 		}
 
@@ -47,7 +53,10 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 			w.Header().Set("Content-type", "application/json")
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(`{"message": "Failed processing file"}`))
+			_, err = w.Write([]byte(`{"message": "Failed processing file"}`))
+			if err != nil {
+				log.Panic(err)
+			}
 			return
 		}
 		defer f.Close()
@@ -58,18 +67,24 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 		if _, err := io.Copy(w, f); err != nil {
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
-			w.Write([]byte(`{"message": "Failed sending file"}`))
+			_, err = w.Write([]byte(`{"message": "Failed sending file"}`))
+			if err != nil {
+				log.Panic(err)
+			}
 			return
 		}
 
 		e := os.RemoveAll(filepath.Dir(fname))
 		if e != nil {
-			log.Fatal(e)
+			log.Panic(e)
 		}
 	default:
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		w.Write([]byte(`{"message": "Method not allowed"}`))
+		_, err := w.Write([]byte(`{"message": "Method not allowed"}`))
+		if err != nil {
+			log.Panic(err)
+		}
 		return
 	}
 
@@ -83,5 +98,8 @@ func main() {
 		log.Printf("defaulting to port %s", port)
 	}
 
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatal(err)
+	}
+
 }
