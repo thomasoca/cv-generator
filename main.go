@@ -74,9 +74,9 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		e := os.RemoveAll(filepath.Dir(fname))
-		if e != nil {
-			log.Panic(e)
+		err = os.RemoveAll(filepath.Dir(fname))
+		if err != nil {
+			log.Panic(err)
 		}
 	default:
 		w.Header().Set("Content-type", "application/json")

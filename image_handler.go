@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"errors"
+	"fmt"
 	"image"
 	"image/jpeg"
 	"image/png"
@@ -12,6 +13,24 @@ import (
 	"path/filepath"
 	"strings"
 )
+
+func stringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
+}
+
+func mimeCheck(response http.Response) (string, error) {
+	contentType := strings.Split(response.Header.Get("Content-Type"), ";")[0]
+	extension := strings.Split(contentType, "/")[1]
+	if stringInSlice(extension, []string{"jpeg", "jpg", "png"}) {
+		return extension, nil
+	}
+	return "", errors.New("the requested file does not have a proper image extension, please use .jpg or .png only")
+}
 
 func imageFromUrl(URL, dirName string) (string, error) {
 	//Get the response bytes from the url
@@ -24,8 +43,14 @@ func imageFromUrl(URL, dirName string) (string, error) {
 	if response.StatusCode != 200 {
 		return "", errors.New("received non 200 response code")
 	}
+	//Check MIME type
+	fileExt, err := mimeCheck(*response)
+	if err != nil {
+		return "", err
+	}
 	//Create a empty file
-	fileName := filepath.Join(dirName, "image.jpg")
+	imageName := fmt.Sprintf("image.%s", fileExt)
+	fileName := filepath.Join(dirName, imageName)
 	file, err := os.Create(fileName)
 	if err != nil {
 		return "", err
@@ -59,7 +84,7 @@ func imageWriter(imageData image.Image, dirName string, extension string) (strin
 
 func imageFromBase64(data string, dirName string) (string, error) {
 	coI := strings.Index(data, ",")
-	rawImage := string(data)[coI+1:]
+	rawImage := data[coI+1:]
 	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(rawImage))
 
 	switch strings.TrimSuffix(data[5:coI], ";base64") {
