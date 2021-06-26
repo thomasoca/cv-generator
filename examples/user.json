@@ -2,7 +2,7 @@
     "personal_info": {
         "name": "Jane Doe",
         "headline": "Software Engineer",
-        "picture": "",
+        "picture": "https://trimelive.com/wp-content/uploads/2020/12/Gambar-wa-12.jpg",
         "email": "jane.doe@email.com",
         "github": "https://github.com/",
         "linkedin": "Jane Doe",
