@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -136,11 +137,15 @@ func generateLatex(dirname string, filename string) error {
 	app := "pdflatex"
 	outdir := "-output-directory=" + dirname
 	cmdArgs := []string{outdir, "-interaction=nonstopmode", "-synctex=1", "-halt-on-error", filename}
-
+	var stderr bytes.Buffer
+	var out bytes.Buffer
 	cmd := exec.Command(app, cmdArgs...)
+	cmd.Stdout = &out
+	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		log.Printf("Command finished with error: %v", err)
+		log.Printf("Command finished with error: %v", stderr.String())
+		log.Println(out.String())
 		return err
 	}
 	return err
