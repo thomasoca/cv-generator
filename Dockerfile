@@ -30,7 +30,7 @@ RUN wget -q "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"
 # install only the packages you need
 RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox \
     enumitem ifmtarg dashrule changepage multirow environ paracol lato \
-    fontaxes
+    fontaxes accsupp
 
 COPY --from=builder /app/api /app/api
 ADD templates ./templates/
