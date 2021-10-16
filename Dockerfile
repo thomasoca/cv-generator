@@ -33,6 +33,7 @@ RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox 
     fontaxes accsupp
 
 COPY --from=builder /app/api /app/api
+COPY examples ./examples/
 ADD templates ./templates/
 COPY run.sh ./
 
