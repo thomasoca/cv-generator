@@ -3,21 +3,39 @@ package main
 import (
 	"bytes"
 	"encoding/json"
-	"io/ioutil"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"testing"
 )
 
-func JsonInput(fname string) []byte {
-	jsonFile, err := os.Open(fname)
+func TestMainApiGet(t *testing.T) {
+
+	req, err := http.NewRequest("GET", "/example", nil)
 	if err != nil {
-		log.Println(err)
+		t.Fatal(err)
 	}
-	byteValue, _ := ioutil.ReadAll(jsonFile)
-	return byteValue
+
+	rr := httptest.NewRecorder()
+	handler := http.HandlerFunc(getExample)
+
+	handler.ServeHTTP(rr, req)
+	result := rr.Result()
+
+	// Check the status code is what we expect.
+	if status := result.StatusCode; status != http.StatusOK {
+		t.Errorf("handler returned wrong status code: got %v want %v with error %v",
+			status, http.StatusOK, rr.Body.String())
+	}
+
+	// Check the header
+	expectedHeader := "application/json"
+
+	if result.Header.Get("Content-type") != expectedHeader {
+		t.Errorf("handler returned unexpected header: got %v want %v",
+			result.Header.Get("Content-type"), expectedHeader)
+	}
+
 }
 
 func TestMainApi(t *testing.T) {

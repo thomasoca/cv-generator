@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -11,7 +12,7 @@ import (
 
 func setupResponse(w *http.ResponseWriter, r *http.Request) {
 	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST")
+	(*w).Header().Set("Access-Control-Allow-Methods", "GET,POST")
 	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
 
@@ -90,8 +91,49 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func JsonInput(fname string) []byte {
+	jsonFile, err := os.Open(fname)
+	if err != nil {
+		log.Println(err)
+	}
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	return byteValue
+}
+
+func getExample(w http.ResponseWriter, r *http.Request) {
+	setupResponse(&w, r)
+	if (*r).Method == "OPTIONS" {
+		return
+	}
+	switch r.Method {
+	case "GET":
+		w.Header().Set("Content-type", "application/json")
+		body := JsonInput("./examples/user.json")
+		_, err := w.Write(body)
+		if err != nil {
+			w.Header().Set("Content-type", "application/json")
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			_, err = w.Write([]byte(`{"message": "Failed processing file"}`))
+			if err != nil {
+				log.Panic(err)
+			}
+		}
+		return
+	default:
+		w.Header().Set("Content-type", "application/json")
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		_, err := w.Write([]byte(`{"message": "Method not allowed"}`))
+		if err != nil {
+			log.Panic(err)
+		}
+		return
+	}
+}
+
 func main() {
 	http.HandleFunc("/user", serveFile)
+	http.HandleFunc("/example", getExample)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
