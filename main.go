@@ -133,7 +133,7 @@ func getExample(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	http.HandleFunc("/user", serveFile)
-	http.HandleFunc("/v1/example", getExample)
+	http.HandleFunc("/example", getExample)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
