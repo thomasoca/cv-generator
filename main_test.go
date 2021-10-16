@@ -11,7 +11,7 @@ import (
 
 func TestMainApiGet(t *testing.T) {
 
-	req, err := http.NewRequest("GET", "/example", nil)
+	req, err := http.NewRequest("GET", "/v1/example", nil)
 	if err != nil {
 		t.Fatal(err)
 	}
