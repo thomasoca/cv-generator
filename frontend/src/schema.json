@@ -1,0 +1,242 @@
+{
+  "type": "object",
+  "properties": {
+    "personal_info": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 3,
+          "description": "Full name, e.g. Jane Doe"
+        },
+        "headline": {
+          "type": "string",
+          "description": "Profile headline, e.g. Awesome Software Engineer"
+        },
+        "email": {
+          "type": "string",
+          "description": "jane.doe@email.com"
+        },
+        "phone_number": {
+          "type": "string",
+          "description": "Any phone format, e.g. 12344555"
+        },
+        "location_1": {
+          "type": "string",
+          "description": "Street/Apartment name and number"
+        },
+        "location_2": {
+          "type": "string",
+          "description": "City, state, country"
+        },
+        "github": {
+          "type": "string",
+          "description": "github.com/jane"
+        },
+        "linkedin": {
+          "type": "string",
+          "description": "LinkedIn name"
+        },
+        "twitter": {
+          "type": "string",
+          "description": "@jane"
+        }
+      }
+    },
+    "main_section": {
+      "type": "object",
+      "properties": {
+        "work_experience": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "lists": {
+              "type": "array",
+              "title": "Employment History",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "company": {
+                    "type": "string"
+                  },
+                  "position": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "start_period": {
+                    "type": "string"
+                  },
+                  "end_period": {
+                    "type": "string"
+                  },
+                  "descriptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "education": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "lists": {
+              "type": "array",
+              "title": "Education history",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "institution": {
+                    "type": "string"
+                  },
+                  "major": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
+                  },
+                  "gpa": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "start_period": {
+                    "type": "string"
+                  },
+                  "end_period": {
+                    "type": "string"
+                  },
+                  "descriptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "extracurricular": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "lists": {
+              "type": "array",
+              "title": "List of extra-curricular activities",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "institution": {
+                    "type": "string"
+                  },
+                  "position": {
+                    "type": "string"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "start_period": {
+                    "type": "string"
+                  },
+                  "end_period": {
+                    "type": "string"
+                  },
+                  "descriptions": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "skills": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "descriptions": {
+              "type": "array",
+              "title": "List of Skills",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "languages": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "descriptions": {
+              "type": "array",
+              "title": "Languages",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "language": {
+                    "type": "string"
+                  },
+                  "fluency": {
+                    "type": "number"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "projects": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "lists": {
+              "type": "array",
+              "title": "List of projects",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "start_period": {
+                    "type": "string"
+                  },
+                  "end_period": {
+                    "type": "string"
+                  },
+                  "descriptions": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
