@@ -1,5 +1,5 @@
 {
-  "name": "jsonforms-react-seed",
+  "name": "cv-generator-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -39,5 +39,9 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "description": "This seed demonstrates how to use [JSON Forms](https://jsonforms.io) with React in order to render a simple form for displaying a task entity.",
+  "main": "index.js",
+  "author": "thomasoca",
+  "license": "ISC"
 }
