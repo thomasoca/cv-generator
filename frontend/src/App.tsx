@@ -3,10 +3,10 @@ import { JsonForms } from "@jsonforms/react";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import logo from "./logo.svg";
 import "./App.css";
 import schema from "./schema.json";
 import uischema from "./uischema.json";
+import initial from "./initial.json";
 import {
   materialCells,
   materialRenderers,
@@ -39,21 +39,6 @@ const useStyles = makeStyles((_theme) => ({
   },
 }));
 
-const initialData = {
-  personal_info: {
-    name: "Jane Doe",
-    headline: "Software Engineer",
-    picture:
-      "https://trimelive.com/wp-content/uploads/2020/12/Gambar-wa-12.jpg",
-    email: "jane.doe@email.com",
-    github: "https://github.com/",
-    linkedin: "Jane Doe",
-    twitter: "",
-    location_1: "Mansion",
-    location_2: "City state",
-  },
-};
-
 const renderers = [
   ...materialRenderers,
   //register custom renderers
@@ -63,7 +48,7 @@ const renderers = [
 const App = () => {
   const classes = useStyles();
   const [displayDataAsString, setDisplayDataAsString] = useState("");
-  const [jsonformsData, setJsonformsData] = useState<any>(initialData);
+  const [jsonformsData, setJsonformsData] = useState<any>(initial);
 
   useEffect(() => {
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
@@ -73,13 +58,31 @@ const App = () => {
     setJsonformsData({});
   };
 
+  const downloadObject = () => {
+    fetch(process.env.REACT_APP_API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: displayDataAsString,
+    })
+      .then((response) => {
+        return response.blob();
+      })
+      .then((data) => {
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(data);
+        a.download = "file.pdf";
+        a.click();
+      });
+  };
+
   return (
     <Fragment>
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to JSON Forms with React</h1>
-          <p className="App-intro">More Forms. Less Code.</p>
+          <img src="./image-logo.png" alt="logo" className="App-logo" />
+          <h1 className="App-title">
+            A not so simple way to generate your resume
+          </h1>
         </header>
       </div>
 
@@ -90,8 +93,8 @@ const App = () => {
         className={classes.container}
       >
         <Grid item sm={10}>
-          <Typography variant={"h3"} className={classes.title}>
-            Rendered form
+          <Typography variant={"h5"} className={classes.title}>
+            Fill the form to make your resume
           </Typography>
           <div className={classes.demoform}>
             <JsonForms
@@ -105,13 +108,6 @@ const App = () => {
           </div>
         </Grid>
         <Grid item sm={6}>
-          <Typography variant={"h3"} className={classes.title}>
-            Bound data
-          </Typography>
-
-          <div className={classes.dataContent}>
-            <pre id="boundData">{displayDataAsString}</pre>
-          </div>
           <Button
             className={classes.resetButton}
             onClick={clearData}
@@ -119,6 +115,15 @@ const App = () => {
             variant="contained"
           >
             Clear data
+          </Button>
+          &nbsp;
+          <Button
+            className={classes.resetButton}
+            onClick={downloadObject}
+            color="primary"
+            variant="contained"
+          >
+            Submit data & get your resume
           </Button>
         </Grid>
       </Grid>
