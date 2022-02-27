@@ -11,9 +11,6 @@ import (
 )
 
 func serveFile(w http.ResponseWriter, r *http.Request) {
-	if (*r).Method == "OPTIONS" {
-		return
-	}
 	switch r.Method {
 	case "POST":
 		decoder := json.NewDecoder(r.Body)
@@ -94,9 +91,6 @@ func JsonInput(fname string) []byte {
 }
 
 func getExample(w http.ResponseWriter, r *http.Request) {
-	if (*r).Method == "OPTIONS" {
-		return
-	}
 	switch r.Method {
 	case "GET":
 		w.Header().Set("Content-type", "application/json")

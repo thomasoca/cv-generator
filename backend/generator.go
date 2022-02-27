@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -59,7 +60,7 @@ func createFile(user User) (string, error) {
 	if path == "" {
 		localPath, err := os.Getwd()
 		if err != nil {
-			log.Println(err)
+			return "", err
 		}
 		path = localPath
 	}
@@ -112,7 +113,6 @@ func createFile(user User) (string, error) {
 	// Execute the template to the file.
 	err = tpl.Execute(f, user)
 	if err != nil {
-		log.Println(err)
 		e := os.RemoveAll(dname)
 		if e != nil {
 			return "", err
@@ -146,7 +146,7 @@ func generateLatex(dirname string, filename string) error {
 	if err != nil {
 		log.Printf("Command finished with error: %v", stderr.String())
 		log.Println(out.String())
-		return err
+		return errors.New("there is a problem when running latex in the server")
 	}
 	return err
 }
