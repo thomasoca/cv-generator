@@ -10,14 +10,7 @@ import (
 	"path/filepath"
 )
 
-func setupResponse(w *http.ResponseWriter, r *http.Request) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "GET,POST")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-}
-
 func serveFile(w http.ResponseWriter, r *http.Request) {
-	setupResponse(&w, r)
 	if (*r).Method == "OPTIONS" {
 		return
 	}
@@ -101,7 +94,6 @@ func JsonInput(fname string) []byte {
 }
 
 func getExample(w http.ResponseWriter, r *http.Request) {
-	setupResponse(&w, r)
 	if (*r).Method == "OPTIONS" {
 		return
 	}
