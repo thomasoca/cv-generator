@@ -124,15 +124,16 @@ func getExample(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/user", serveFile)
-	http.HandleFunc("/example", getExample)
+	mux := http.NewServeMux()
+	mux.Handle("/", http.FileServer(http.Dir("./build")))
+	mux.HandleFunc("/api/generate", serveFile)
+	mux.HandleFunc("/api/example", getExample)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 		log.Printf("defaulting to port %s", port)
 	}
-
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
+	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatal(err)
 	}
 
