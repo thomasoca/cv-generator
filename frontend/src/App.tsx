@@ -59,19 +59,25 @@ const App = () => {
   };
 
   const downloadObject = () => {
-    fetch(process.env.REACT_APP_API_URL, {
+    fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: displayDataAsString,
     })
       .then((response) => {
-        return response.blob();
+        if (response.ok) {
+          return response.blob();
+        }
+        throw new Error(response.statusText);
       })
       .then((data) => {
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(data);
         a.download = "file.pdf";
         a.click();
+      })
+      .catch((err): void => {
+        console.log(JSON.stringify(err.message, null, 2));
       });
   };
 
