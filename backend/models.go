@@ -1,6 +1,6 @@
 package main
 
-// User ...
+// User type, based on the JSON input from the client
 type User struct {
 	PersonalInfo struct {
 		Name      string `json:"name"`
@@ -76,4 +76,30 @@ type User struct {
 			} `json:"descriptions"`
 		} `json:"languages"`
 	} `json:"main_section"`
+}
+
+// Modify will change the value of the profile picture section into directory to the image file
+func (u *User) Modify(dirname string) error {
+	imageData := u.PersonalInfo.Picture
+	if imageData != "" {
+		var newImage string
+		checkUrl := IsUrl(imageData)
+		if checkUrl {
+			newImage, err := imageFromUrl(imageData, dirname)
+			if err != nil {
+				return err
+			}
+			u.PersonalInfo.Picture = newImage
+			return err
+		}
+
+		newImage, err := imageFromBase64(imageData, dirname)
+		if err != nil {
+			return err
+		}
+		u.PersonalInfo.Picture = newImage
+		return err
+	}
+
+	return nil
 }

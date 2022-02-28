@@ -34,31 +34,6 @@ func replaceUnescapedChar(str string) string {
 	return strings.Replace(str, "_", "{\\_}", -1)
 }
 
-func (u *User) Modify(dirname string) error {
-	imageData := u.PersonalInfo.Picture
-	if imageData != "" {
-		var newImage string
-		checkUrl := IsUrl(imageData)
-		if checkUrl {
-			newImage, err := imageFromUrl(imageData, dirname)
-			if err != nil {
-				return err
-			}
-			u.PersonalInfo.Picture = newImage
-			return err
-		}
-
-		newImage, err := imageFromBase64(imageData, dirname)
-		if err != nil {
-			return err
-		}
-		u.PersonalInfo.Picture = newImage
-		return err
-	}
-
-	return nil
-}
-
 func removeLatexFiles(env string, dirName string) {
 	if env == "PRD" {
 		e := os.RemoveAll(dirName)
