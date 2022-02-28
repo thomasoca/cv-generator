@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"text/template"
 	"time"
 )
@@ -27,6 +28,10 @@ func randSeq(n int) string {
 func IsUrl(str string) bool {
 	u, err := url.Parse(str)
 	return err == nil && u.Scheme != "" && u.Host != ""
+}
+
+func replaceUnescapedChar(str string) string {
+	return strings.Replace(str, "_", "{\\_}", -1)
 }
 
 func (u *User) Modify(dirname string) error {
@@ -54,6 +59,15 @@ func (u *User) Modify(dirname string) error {
 	return nil
 }
 
+func removeLatexFiles(env string, dirName string) {
+	if env == "PRD" {
+		e := os.RemoveAll(dirName)
+		if e != nil {
+			panic(e)
+		}
+	}
+}
+
 func createFile(user User) (string, error) {
 	rand.Seed(time.Now().UnixNano())
 	path := os.Getenv("PROJECT_DIR")
@@ -65,7 +79,7 @@ func createFile(user User) (string, error) {
 		path = localPath
 	}
 	templatePath := path + "/templates/template.txt"
-	tpl, err := template.ParseFiles(templatePath)
+	tpl, err := template.New("template.txt").Funcs(template.FuncMap{"replaceUnescapedChar": replaceUnescapedChar}).ParseFiles(templatePath)
 	if err != nil {
 		return "", err
 	}
@@ -95,36 +109,24 @@ func createFile(user User) (string, error) {
 	// Convert image
 	err = user.Modify(dname)
 	if err != nil {
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 
 	f, err := os.Create(filename)
 	if err != nil {
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 	// Execute the template to the file.
 	err = tpl.Execute(f, user)
 	if err != nil {
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 	err = generateLatex(dname, filename)
 	if err != nil {
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 	// Close the file when done.
@@ -144,7 +146,7 @@ func generateLatex(dirname string, filename string) error {
 	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		log.Printf("Command finished with error: %v", stderr.String())
+		log.Printf("Command finished with error: %v", err)
 		log.Println(out.String())
 		return errors.New("there is a problem when running latex in the server")
 	}
