@@ -125,5 +125,6 @@ func generateLatex(dirname string, filename string) error {
 		log.Println(out.String())
 		return errors.New("there is a problem when running latex in the server")
 	}
+	log.Println("Latex file generated successfully")
 	return err
 }
