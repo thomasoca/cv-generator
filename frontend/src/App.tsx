@@ -3,6 +3,8 @@ import { JsonForms } from "@jsonforms/react";
 import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
 import "./App.css";
 import schema from "./schema.json";
 import uischema from "./uischema.json";
@@ -51,6 +53,9 @@ const App = () => {
   const [displayDataAsString, setDisplayDataAsString] = useState("");
   const [jsonformsData, setJsonformsData] = useState<any>(initial);
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const onDismiss = () => setVisible(false);
 
   useEffect(() => {
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
@@ -68,10 +73,12 @@ const App = () => {
       body: displayDataAsString,
     })
       .then((response) => {
-        if (response.ok) {
-          return response.blob();
+        if (!response.ok) {
+          return response.json().then((text) => {
+            throw new Error(text.message);
+          });
         }
-        throw new Error(response.statusText);
+        return response.blob();
       })
       .then((data) => {
         var a = document.createElement("a");
@@ -82,13 +89,23 @@ const App = () => {
       })
       .catch((err): void => {
         setLoading(false);
-        console.log(JSON.stringify(err.message, null, 2));
+        setVisible(true);
+        setErrorMessage(err.message);
       });
   };
 
   return (
     <Fragment>
       <Loading loading={loading} />
+      {visible ? (
+        <Alert severity="error" onClose={onDismiss}>
+          <AlertTitle>Error</AlertTitle>
+          {errorMessage} —{" "}
+          <strong>please check your input or try again later</strong>
+        </Alert>
+      ) : (
+        <></>
+      )}
       <div className="App">
         <header className="App-header">
           <img src="./image-logo.png" alt="logo" className="App-logo" />
