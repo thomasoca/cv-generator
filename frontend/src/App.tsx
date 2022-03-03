@@ -12,6 +12,7 @@ import {
   materialRenderers,
 } from "@jsonforms/material-renderers";
 import { makeStyles } from "@mui/styles";
+import Loading from "./Loading";
 
 const useStyles = makeStyles((_theme) => ({
   container: {
@@ -49,6 +50,7 @@ const App = () => {
   const classes = useStyles();
   const [displayDataAsString, setDisplayDataAsString] = useState("");
   const [jsonformsData, setJsonformsData] = useState<any>(initial);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
@@ -59,6 +61,7 @@ const App = () => {
   };
 
   const downloadObject = () => {
+    setLoading(true);
     fetch("/api/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -75,14 +78,17 @@ const App = () => {
         a.href = window.URL.createObjectURL(data);
         a.download = "file.pdf";
         a.click();
+        setLoading(false);
       })
       .catch((err): void => {
+        setLoading(false);
         console.log(JSON.stringify(err.message, null, 2));
       });
   };
 
   return (
     <Fragment>
+      <Loading loading={loading} />
       <div className="App">
         <header className="App-header">
           <img src="./image-logo.png" alt="logo" className="App-logo" />
