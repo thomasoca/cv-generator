@@ -10,17 +10,7 @@ import (
 	"path/filepath"
 )
 
-func setupResponse(w *http.ResponseWriter, r *http.Request) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "GET,POST")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-}
-
 func serveFile(w http.ResponseWriter, r *http.Request) {
-	setupResponse(&w, r)
-	if (*r).Method == "OPTIONS" {
-		return
-	}
 	switch r.Method {
 	case "POST":
 		decoder := json.NewDecoder(r.Body)
@@ -101,10 +91,6 @@ func JsonInput(fname string) []byte {
 }
 
 func getExample(w http.ResponseWriter, r *http.Request) {
-	setupResponse(&w, r)
-	if (*r).Method == "OPTIONS" {
-		return
-	}
 	switch r.Method {
 	case "GET":
 		w.Header().Set("Content-type", "application/json")
@@ -132,15 +118,16 @@ func getExample(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/user", serveFile)
-	http.HandleFunc("/example", getExample)
+	mux := http.NewServeMux()
+	mux.Handle("/", http.FileServer(http.Dir("./build")))
+	mux.HandleFunc("/api/generate", serveFile)
+	mux.HandleFunc("/api/example", getExample)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 		log.Printf("defaulting to port %s", port)
 	}
-
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
+	if err := http.ListenAndServe(":"+port, mux); err != nil {
 		log.Fatal(err)
 	}
 

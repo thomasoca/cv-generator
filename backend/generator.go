@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"io/ioutil"
 	"log"
 	"math/rand"
@@ -9,6 +10,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"strings"
 	"text/template"
 	"time"
 )
@@ -28,29 +30,17 @@ func IsUrl(str string) bool {
 	return err == nil && u.Scheme != "" && u.Host != ""
 }
 
-func (u *User) Modify(dirname string) error {
-	imageData := u.PersonalInfo.Picture
-	if imageData != "" {
-		var newImage string
-		checkUrl := IsUrl(imageData)
-		if checkUrl {
-			newImage, err := imageFromUrl(imageData, dirname)
-			if err != nil {
-				return err
-			}
-			u.PersonalInfo.Picture = newImage
-			return err
-		}
+func replaceUnescapedChar(str string) string {
+	return strings.Replace(str, "_", "{\\_}", -1)
+}
 
-		newImage, err := imageFromBase64(imageData, dirname)
-		if err != nil {
-			return err
+func removeLatexFiles(env string, dirName string) {
+	if env == "PRD" {
+		e := os.RemoveAll(dirName)
+		if e != nil {
+			panic(e)
 		}
-		u.PersonalInfo.Picture = newImage
-		return err
 	}
-
-	return nil
 }
 
 func createFile(user User) (string, error) {
@@ -59,12 +49,12 @@ func createFile(user User) (string, error) {
 	if path == "" {
 		localPath, err := os.Getwd()
 		if err != nil {
-			log.Println(err)
+			return "", err
 		}
 		path = localPath
 	}
 	templatePath := path + "/templates/template.txt"
-	tpl, err := template.ParseFiles(templatePath)
+	tpl, err := template.New("template.txt").Funcs(template.FuncMap{"replaceUnescapedChar": replaceUnescapedChar}).ParseFiles(templatePath)
 	if err != nil {
 		return "", err
 	}
@@ -94,37 +84,24 @@ func createFile(user User) (string, error) {
 	// Convert image
 	err = user.Modify(dname)
 	if err != nil {
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 
 	f, err := os.Create(filename)
 	if err != nil {
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 	// Execute the template to the file.
 	err = tpl.Execute(f, user)
 	if err != nil {
-		log.Println(err)
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 	err = generateLatex(dname, filename)
 	if err != nil {
-		e := os.RemoveAll(dname)
-		if e != nil {
-			return "", err
-		}
+		removeLatexFiles(envMode, dname)
 		return "", err
 	}
 	// Close the file when done.
@@ -144,9 +121,10 @@ func generateLatex(dirname string, filename string) error {
 	cmd.Stderr = &stderr
 	err := cmd.Run()
 	if err != nil {
-		log.Printf("Command finished with error: %v", stderr.String())
+		log.Printf("Command finished with error: %v", err)
 		log.Println(out.String())
-		return err
+		return errors.New("there is a problem when running latex in the server")
 	}
+	log.Println("Latex file generated successfully")
 	return err
 }

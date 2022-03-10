@@ -1,0 +1,363 @@
+{
+  "type": "Categorization",
+  "elements": [
+    {
+      "type": "Category",
+      "label": "Personal Info",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/personal_info/properties/name"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/personal_info/properties/headline"
+            }
+          ]
+        },
+        {
+          "type": "HorizontalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/personal_info/properties/email"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/personal_info/properties/phone_number"
+            }
+          ]
+        },
+        {
+          "type": "HorizontalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "label": "Address line 1",
+              "scope": "#/properties/personal_info/properties/location_1"
+            },
+            {
+              "type": "Control",
+              "label": "Address line 2",
+              "scope": "#/properties/personal_info/properties/location_2"
+            }
+          ]
+        },
+        {
+          "type": "HorizontalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/personal_info/properties/twitter"
+            },
+            {
+              "type": "Control",
+              "label": "LinkedIn",
+              "scope": "#/properties/personal_info/properties/linkedin"
+            },
+            {
+              "type": "Control",
+              "label": "GitHub",
+              "scope": "#/properties/personal_info/properties/github"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Work Experience",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/work_experience/properties/label"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/work_experience/properties/lists",
+              "options": {
+                "elementLabelProp": "company",
+                "detail": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/company"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/position"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/location"
+                    },
+                    {
+                      "type": "HorizontalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/start_period"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/end_period"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/descriptions"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Education",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/education/properties/label"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/education/properties/lists",
+              "options": {
+                "elementLabelProp": "institution",
+                "detail": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/institution"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/major"
+                    },
+                    {
+                      "type": "HorizontalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/major"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/gpa"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/location"
+                    },
+                    {
+                      "type": "HorizontalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/start_period"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/end_period"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/descriptions"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Extra-curricular Activities",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/extracurricular/properties/label"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/extracurricular/properties/lists",
+              "options": {
+                "elementLabelProp": "institution",
+                "detail": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/institution"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/position"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/location"
+                    },
+                    {
+                      "type": "HorizontalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/start_period"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/end_period"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/descriptions"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Projects",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/projects/properties/label"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/projects/properties/lists",
+              "options": {
+                "elementLabelProp": "title",
+                "detail": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/title"
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/link"
+                    },
+                    {
+                      "type": "HorizontalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/start_period"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/end_period"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Control",
+                      "scope": "#/properties/descriptions"
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Skills",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/skills/properties/label"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/skills/properties/descriptions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
+      "label": "Languages",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/languages/properties/label"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/languages/properties/descriptions",
+              "options": {
+                "elementLabelProp": "language",
+                "detail": {
+                  "type": "VerticalLayout",
+                  "elements": [
+                    {
+                      "type": "HorizontalLayout",
+                      "elements": [
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/language"
+                        },
+                        {
+                          "type": "Control",
+                          "scope": "#/properties/fluency"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

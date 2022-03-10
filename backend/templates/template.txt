@@ -128,11 +128,11 @@
 {{if $i}}
 \divider
 {{end}}
-\cvevent{{"{"}}{{.Position}}{{"}"}}{{"{"}}{{.Company}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\cvevent{{"{"}}{{.Position}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Company}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
 {{if $it.Descriptions}}
 \begin{itemize}
 {{range $it.Descriptions}}
-\item {{.}}
+\item {{replaceUnescapedChar .}}
 {{end}}
 \end{itemize}
 {{end}}
@@ -148,7 +148,7 @@
 {{if $it.Descriptions}}
 \begin{itemize}
 {{range $it.Descriptions}}
-\item {{.}}
+\item {{replaceUnescapedChar .}}
 {{end}}
 \end{itemize}
 {{end}}
@@ -160,11 +160,11 @@
 {{if $i}}
 \divider
 {{end}}
-\cvevent{{"{"}}{{.Position}}{{"}"}}{{"{"}}{{.Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\cvevent{{"{"}}{{replaceUnescapedChar .Position}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
 {{if $it.Descriptions}}
 \begin{itemize}
 {{range $it.Descriptions}}
-\item {{.}}
+\item {{replaceUnescapedChar .}}
 {{end}}
 \end{itemize}
 {{end}}
@@ -183,9 +183,9 @@
 {{if $i}}
 \divider
 {{end}}
-\cvproject{{"{"}}{{.Title}}{{"}"}}{{"{"}}{{.Link}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}
+\cvproject{{"{"}}{{replaceUnescapedChar .Title}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Link}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}
 {{if $it.Descriptions}}
-{{$it.Descriptions}}
+{{replaceUnescapedChar $it.Descriptions}}
 {{end}}
 {{end}}
 {{- end}}

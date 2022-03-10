@@ -1,0 +1,51 @@
+{
+  "name": "cv-generator-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@jsonforms/core": "^2.5.1",
+    "@jsonforms/material-renderers": "^2.5.1",
+    "@jsonforms/react": "^2.5.1",
+    "@mui/icons-material": "^5.4.4",
+    "@mui/material": "^5.4.4",
+    "@mui/styles": "^5.4.4",
+    "@types/node": "^14.14.14",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "typescript": "^4.1.3"
+  },
+  "devDependencies": {
+    "cypress": "^6.1.0",
+    "react-scripts": "^4.0.1",
+    "start-server-and-test": "^1.11.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run --config video=false",
+    "cypress:ci": "BROWSER=none start-server-and-test start http://localhost:3000 cypress:run"
+  },
+  "proxy": "http://localhost:8080",
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "description": "This seed demonstrates how to use [JSON Forms](https://jsonforms.io) with React in order to render a simple form for displaying a task entity.",
+  "main": "index.js",
+  "author": "thomasoca",
+  "license": "ISC"
+}
