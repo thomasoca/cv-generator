@@ -49,15 +49,18 @@ const renderers = [
 ];
 
 const App = () => {
+  const savedData = localStorage.getItem("user");
+  const initialData = !savedData ? initial : JSON.parse(savedData);
   const classes = useStyles();
   const [displayDataAsString, setDisplayDataAsString] = useState("");
-  const [jsonformsData, setJsonformsData] = useState<any>(initial);
+  const [jsonformsData, setJsonformsData] = useState<any>(initialData);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const onDismiss = () => setVisible(false);
 
   useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(jsonformsData, null, 2));
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
   }, [jsonformsData]);
 
