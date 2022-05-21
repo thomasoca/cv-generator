@@ -13,34 +13,7 @@ import {
   materialCells,
   materialRenderers,
 } from "@jsonforms/material-renderers";
-import { makeStyles } from "@mui/styles";
 import Loading from "./Loading";
-
-const useStyles = makeStyles((_theme) => ({
-  container: {
-    padding: "1em",
-    width: "100%",
-  },
-  title: {
-    textAlign: "center",
-    padding: "0.25em",
-  },
-  dataContent: {
-    display: "flex",
-    justifyContent: "center",
-    borderRadius: "0.25em",
-    backgroundColor: "#cecece",
-    marginBottom: "1rem",
-  },
-  resetButton: {
-    margin: "auto",
-    display: "block",
-  },
-  demoform: {
-    margin: "auto",
-    padding: "1rem",
-  },
-}));
 
 const renderers = [
   ...materialRenderers,
@@ -51,7 +24,6 @@ const renderers = [
 const App = () => {
   const savedData = localStorage.getItem("user");
   const initialData = !savedData ? initial : JSON.parse(savedData);
-  const classes = useStyles();
   const [displayDataAsString, setDisplayDataAsString] = useState("");
   const [jsonformsData, setJsonformsData] = useState<any>(initialData);
   const [loading, setLoading] = useState(false);
@@ -122,13 +94,19 @@ const App = () => {
         container
         justifyContent={"center"}
         spacing={1}
-        className={classes.container}
+        className="container"
       >
         <Grid item sm={10}>
-          <Typography variant={"h5"} className={classes.title}>
+          <Typography
+            variant={"h5"}
+            sx={{
+              textAlign: "center",
+              padding: "0.25em",
+            }}
+          >
             Fill the form to make your resume
           </Typography>
-          <div className={classes.demoform}>
+          <div className="demoform">
             <JsonForms
               schema={schema}
               uischema={uischema}
@@ -141,7 +119,7 @@ const App = () => {
         </Grid>
         <Grid item sm={6}>
           <Button
-            className={classes.resetButton}
+            className="resetbutton"
             onClick={clearData}
             color="primary"
             variant="contained"
@@ -150,7 +128,7 @@ const App = () => {
           </Button>
           &nbsp;
           <Button
-            className={classes.resetButton}
+            className="resetbutton"
             onClick={downloadObject}
             color="primary"
             variant="contained"
