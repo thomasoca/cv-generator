@@ -120,8 +120,8 @@ func getExample(w http.ResponseWriter, r *http.Request) {
 func main() {
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServer(http.Dir("./build")))
-	mux.HandleFunc("/api/generate", serveFile)
-	mux.HandleFunc("/api/example", getExample)
+	mux.HandleFunc("/api/v1/generate", serveFile)
+	mux.HandleFunc("/api/v1/example", getExample)
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

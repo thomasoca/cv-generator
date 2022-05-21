@@ -21,3 +21,27 @@
 .App-intro {
   font-size: large;
 }
+
+.container: {
+  padding: "1em";
+  width: "100%";
+}
+.title: {
+  text-align: "center";
+  padding: "0.25em";
+}
+.datacontent: {
+  display: "flex";
+  justify-content: "center";
+  border-radius: "0.25em";
+  background-color: "#cecece";
+  margin-bottom: "1rem";
+}
+.resetbutton: {
+  margin: "auto";
+  display: "block";
+}
+.demoform: {
+  margin: "auto";
+  padding: "1rem";
+}
