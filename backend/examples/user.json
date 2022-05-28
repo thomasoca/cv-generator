@@ -1,143 +1,138 @@
 {
-    "personal_info": {
-        "name": "Jane Doe",
-        "headline": "Software Engineer",
-        "picture": "https://trimelive.com/wp-content/uploads/2020/12/Gambar-wa-12.jpg",
-        "email": "jane.doe@email.com",
-        "github": "https://github.com/",
-        "linkedin": "Jane Doe",
-        "twitter": "",
-        "location_1": "Mansion",
-        "location_2": "City state"
+  "personal_info": {
+    "name": "Jane Doe",
+    "headline": "Software Engineer",
+    "picture": "",
+    "email": "jane.doe@email.com",
+    "github": "https://github.com/",
+    "linkedin": "Jane Doe",
+    "twitter": "",
+    "location_1": "Mansion",
+    "location_2": "City state"
+  },
+  "main_section": {
+    "about_me": {
+      "label": "About Me",
+      "descriptions": "An aspiring CEO and computer scientist. Love to combine many ideas on computer science and software engineering into a practical business product"
     },
-    "main_section": {
-        "about_me": {
-            "label": "About Me",
-            "descriptions": "An aspiring CEO and computer scientist. Love to combine many ideas on computer science and software engineering into a practical business product"
+    "work_experience": {
+      "label": "Experience",
+      "lists": [
+        {
+          "company": "Mature Start-up",
+          "position": "CEO",
+          "start_period": "2015",
+          "end_period": "now",
+          "location": "City 2, XY",
+          "descriptions": [
+            "Launching stable product",
+            "Make profit",
+            "IPO on 2020",
+            "Reach 100k users"
+          ]
         },
-        "work_experience": {
-            "label": "Experience",
-            "lists": [
-                {
-                    "company": "Mature Start-up",
-                    "position": "CEO",
-                    "start_period": "2015",
-                    "end_period": "now",
-                    "location": "City 2, XY",
-                    "descriptions": [
-                        "Launching stable product",
-                        "Make profit",
-                        "IPO on 2020",
-                        "Reach 100k users"
-                    ]
-                },
-                {
-                    "company": "Start-up",
-                    "position": "CTO",
-                    "start_period": "2013",
-                    "end_period": "2015",
-                    "location": "City 2, XY",
-                    "descriptions": []
-                },
-                {
-                    "company": "A Corporation",
-                    "position": "Intern",
-                    "start_period": "2011",
-                    "end_period": "2012",
-                    "location": "City 1, XX",
-                    "descriptions": []
-                }
-            ]
+        {
+          "company": "Start-up",
+          "position": "CTO",
+          "start_period": "2013",
+          "end_period": "2015",
+          "location": "City 2, XY",
+          "descriptions": []
         },
-        "education": {
-            "label": "Education",
-            "lists": [
-                {
-                    "institution": "Graduate School",
-                    "major": "Computer Science",
-                    "level": "Master's degree",
-                    "gpa": "3.92",
-                    "start_period": "2010",
-                    "end_period": "2012",
-                    "location": "City 1, XX",
-                    "descriptions": [
-                        "Write thesis",
-                        "Graduate assistant"
-                    ]
-                },
-                {
-                    "institution": "University",
-                    "major": "Computer Science",
-                    "level": "Bachelor's degree",
-                    "gpa": "3.72",
-                    "start_period": "2006",
-                    "end_period": "2010",
-                    "location": "Palo Alto, CA",
-                    "descriptions": [
-                        "CompSci club",
-                        "Student union"
-                    ]
-                }
-            ]
-        },
-        "extracurricular": {
-            "label": "Extra-curricular Activities",
-            "lists": [
-                {
-                    "institution": "Kids Can Code",
-                    "position": "Tutor",
-                    "start_period": "2012",
-                    "end_period": "now",
-                    "location": "City 2, XY",
-                    "descriptions": [
-                        "Volunteering by tutoring kids age 6-12",
-                        "Organize things"
-                    ]
-                }
-            ]
-        },
-        "skills": {
-            "label": "Skills",
-            "descriptions": [
-                "HTML",
-                "CSS",
-                "Javascript",
-                "Python",
-                "Go",
-                "Software Engineering"
-            ]
-        },
-        "projects": {
-            "label": "Projects",
-            "lists": [
-                {
-                    "title": "Personal Blog",
-                    "link": "janedoe.github.io",
-                    "start_period": "2012",
-                    "end_period": "now",
-                    "descriptions": "My personal blog, created using Typescript, React, and create-react-app. Deployed as a SPA on Github CDN."
-                },
-                {
-                    "title": "Kids Can Code Website",
-                    "link": "kidscancode.io",
-                    "start_period": "2013",
-                    "end_period": "now",
-                    "descriptions": "Kids Can Code website, created using Typescript, React, Go, and Postgresql. A full-stack website that handling the registration of Kids Can Code programming camp."
-                }
-            ]
-        },
-        "languages": {
-            "label": "Languages",
-            "descriptions": [
-                {
-                    "language": "English",
-                    "fluency": 5
-                },
-                {
-                    "language": "Japanese",
-                    "fluency": 4
-                }
-            ]
+        {
+          "company": "A Corporation",
+          "position": "Intern",
+          "start_period": "2011",
+          "end_period": "2012",
+          "location": "City 1, XX",
+          "descriptions": []
         }
+      ]
+    },
+    "education": {
+      "label": "Education",
+      "lists": [
+        {
+          "institution": "Graduate School",
+          "major": "Computer Science",
+          "level": "Master's degree",
+          "gpa": "3.92",
+          "start_period": "2010",
+          "end_period": "2012",
+          "location": "City 1, XX",
+          "descriptions": ["Write thesis", "Graduate assistant"]
+        },
+        {
+          "institution": "University",
+          "major": "Computer Science",
+          "level": "Bachelor's degree",
+          "gpa": "3.72",
+          "start_period": "2006",
+          "end_period": "2010",
+          "location": "Palo Alto, CA",
+          "descriptions": ["CompSci club", "Student union"]
+        }
+      ]
+    },
+    "extracurricular": {
+      "label": "Extra-curricular Activities",
+      "lists": [
+        {
+          "institution": "Kids Can Code",
+          "position": "Tutor",
+          "start_period": "2012",
+          "end_period": "now",
+          "location": "City 2, XY",
+          "descriptions": [
+            "Volunteering by tutoring kids age 6-12",
+            "Organize things"
+          ]
+        }
+      ]
+    },
+    "skills": {
+      "label": "Skills",
+      "descriptions": [
+        "HTML",
+        "CSS",
+        "Javascript",
+        "Python",
+        "Go",
+        "Software Engineering"
+      ]
+    },
+    "projects": {
+      "label": "Projects",
+      "lists": [
+        {
+          "title": "Personal Blog",
+          "link": "janedoe.github.io",
+          "start_period": "2012",
+          "end_period": "now",
+          "descriptions": "My personal blog, created using Typescript, React, and create-react-app. Deployed as a SPA on Github CDN."
+        },
+        {
+          "title": "Kids Can Code Website",
+          "link": "kidscancode.io",
+          "start_period": "2013",
+          "end_period": "now",
+          "descriptions": "Kids Can Code website, created using Typescript, React, Go, and Postgresql. A full-stack website that handling the registration of Kids Can Code programming camp."
+        }
+      ]
+    },
+    "languages": {
+      "label": "Languages",
+      "descriptions": [
+        {
+          "language": "English",
+          "fluency": 5
+        },
+        {
+          "language": "Japanese",
+          "fluency": 4
+        }
+      ]
     }
+  }
 }
+
