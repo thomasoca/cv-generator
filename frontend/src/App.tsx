@@ -42,7 +42,7 @@ const App = () => {
 
   const downloadObject = () => {
     setLoading(true);
-    fetch("/api/generate", {
+    fetch("/api/v1/generate", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: displayDataAsString,
