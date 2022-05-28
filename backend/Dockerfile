@@ -27,6 +27,7 @@ ENV ENV_MODE PRD
 WORKDIR /app
 # Download altacv class from the author github
 RUN wget -q "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"
+RUN wget -q "http://tug.ctan.org/tex-archive/macros/latex/contrib/extsizes/extarticle.cls"
 # install only the packages you need
 RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox \
     enumitem ifmtarg dashrule changepage multirow environ paracol lato \
