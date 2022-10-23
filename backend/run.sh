@@ -20,4 +20,8 @@ cat <<EOT >> altacv.cls
   \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\faCalendar~#3}}}%
   \medskip\normalsize
 }
+\newcommand{\cvskillstr}[2]{%
+  \textcolor{emphasis}{\textbf{#1}}\hfill
+  \textbf{\color{body}#2}\par
+}
 EOT
