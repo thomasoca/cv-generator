@@ -14,6 +14,7 @@ jobs:
 
       - name: Push and Release a Docker container to the production
         uses: johnbeynon/render-deploy-action@v0.0.8
-				with:
-	  			service-id: ${{ secrets.RENDER_SERVICE_NAME }}
-	  			api-key: ${{ secrets.RENDER_API_KEY }}
+        with:
+          service-id: ${{ secrets.RENDER_SERVICE_NAME }}
+          api-key: ${{ secrets.RENDER_API_KEY }}
+
