@@ -197,7 +197,29 @@
                     "type": "string"
                   },
                   "fluency": {
-                    "type": "number"
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "Native or bilingual proficiency",
+                        "title": "Native or bilingual proficiency"
+                      },
+                      {
+                        "const": "Full professional proficiency",
+                        "title": "Full professional proficiency"
+                      },
+                      {
+                        "const": "Professional working proficiency",
+                        "title": "Professional working proficiency"
+                      },
+                      {
+                        "const": "Limited working proficiency",
+                        "title": "Limited working proficiency"
+                      },
+                      {
+                        "const": "Elementary proficiency",
+                        "title": "Elementary proficiency"
+                      }
+                    ]
                   }
                 }
               }

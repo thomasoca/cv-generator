@@ -72,7 +72,7 @@ type User struct {
 			Label        string `json:"label"`
 			Descriptions []struct {
 				Language string `json:"language"`
-				Fluency  int    `json:"fluency"`
+				Fluency  string `json:"fluency"`
 			} `json:"descriptions"`
 		} `json:"languages"`
 	} `json:"main_section"`
