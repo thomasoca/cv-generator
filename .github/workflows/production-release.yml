@@ -1,0 +1,19 @@
+name: Deploy to production environment
+
+# Run workflow on every push to main branch.
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Push and Release a Docker container to the production
+        uses: johnbeynon/render-deploy-action
+        with:
+	      service-id: ${{ secrets.RENDER_SERVICE_NAME }}
+	      api-key: ${{ secrets.RENDER_API_KEY }}

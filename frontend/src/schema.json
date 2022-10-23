@@ -197,7 +197,29 @@
                     "type": "string"
                   },
                   "fluency": {
-                    "type": "number"
+                    "type": "string",
+                    "oneOf": [
+                      {
+                        "const": "Native/bilingual",
+                        "title": "Native/bilingual"
+                      },
+                      {
+                        "const": "Fluent",
+                        "title": "Fluent"
+                      },
+                      {
+                        "const": "Proficient",
+                        "title": "Proficient"
+                      },
+                      {
+                        "const": "Intermediate",
+                        "title": "Intermediate"
+                      },
+                      {
+                        "const": "Beginner",
+                        "title": "Begineer"
+                      }
+                    ]
                   }
                 }
               }

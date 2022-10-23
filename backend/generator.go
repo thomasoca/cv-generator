@@ -53,8 +53,8 @@ func createFile(user User) (string, error) {
 		}
 		path = localPath
 	}
-	templatePath := path + "/templates/template.txt"
-	tpl, err := template.New("template.txt").Funcs(template.FuncMap{"replaceUnescapedChar": replaceUnescapedChar}).ParseFiles(templatePath)
+	templatePath := path + "/templates/template.tmpl"
+	tpl, err := template.New("template.tmpl").Funcs(template.FuncMap{"replaceUnescapedChar": replaceUnescapedChar}).ParseFiles(templatePath)
 	if err != nil {
 		return "", err
 	}

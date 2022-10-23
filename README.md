@@ -10,7 +10,7 @@ A web app to generate beautiful LaTeX resume using available open source templat
 
 ## Live website
 
-https://cv-generator-tex.herokuapp.com/
+https://cv-generator-40m5.onrender.com
 
 ## Run it locally
 
