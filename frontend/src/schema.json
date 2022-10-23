@@ -200,24 +200,24 @@
                     "type": "string",
                     "oneOf": [
                       {
-                        "const": "Native or bilingual proficiency",
-                        "title": "Native or bilingual proficiency"
+                        "const": "Native/bilingual",
+                        "title": "Native/bilingual"
                       },
                       {
-                        "const": "Full professional proficiency",
-                        "title": "Full professional proficiency"
+                        "const": "Fluent",
+                        "title": "Fluent"
                       },
                       {
-                        "const": "Professional working proficiency",
-                        "title": "Professional working proficiency"
+                        "const": "Proficient",
+                        "title": "Proficient"
                       },
                       {
-                        "const": "Limited working proficiency",
-                        "title": "Limited working proficiency"
+                        "const": "Intermediate",
+                        "title": "Intermediate"
                       },
                       {
-                        "const": "Elementary proficiency",
-                        "title": "Elementary proficiency"
+                        "const": "Beginner",
+                        "title": "Begineer"
                       }
                     ]
                   }
