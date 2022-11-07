@@ -117,16 +117,7 @@ const App = () => {
             />
           </div>
         </Grid>
-        <Grid item sm={6}>
-          <Button
-            className="resetbutton"
-            onClick={clearData}
-            color="primary"
-            variant="contained"
-          >
-            Clear data
-          </Button>
-          &nbsp;
+        <Grid item sm={10}>
           <Button
             className="resetbutton"
             onClick={downloadObject}
@@ -134,6 +125,15 @@ const App = () => {
             variant="contained"
           >
             Submit data & get your resume
+          </Button>
+          &nbsp;
+          <Button
+            className="resetbutton"
+            onClick={clearData}
+            color="primary"
+            variant="contained"
+          >
+            Clear data
           </Button>
         </Grid>
       </Grid>
