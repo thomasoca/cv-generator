@@ -154,7 +154,7 @@
 {{end}}
 {{end}}
 
-{{- if (index .MainSection.Extracurricular.Lists 0).Institution}}
+{{if .MainSection.Extracurricular.Lists}}
 \cvsection{{"{"}}{{.MainSection.Extracurricular.Label}}{{"}"}}
 {{range $i, $it := .MainSection.Extracurricular.Lists}}
 {{if $i}}
@@ -169,7 +169,7 @@
 \end{itemize}
 {{end}}
 {{end}}
-{{- end}}
+{{end}}
 
 \switchcolumn
 \cvsection{{"{"}}{{.MainSection.AboutMe.Label}}{{"}"}}
@@ -177,7 +177,7 @@
   {{.MainSection.AboutMe.Descriptions}}
 \end{quote}
 
-{{- if (index .MainSection.Projects.Lists 0).Title}}
+{{if .MainSection.Projects.Lists}}
 \cvsection{{"{"}}{{.MainSection.Projects.Label}}{{"}"}}
 {{range $i, $it := .MainSection.Projects.Lists}}
 {{if $i}}
@@ -188,7 +188,7 @@
 {{replaceUnescapedChar $it.Descriptions}}
 {{end}}
 {{end}}
-{{- end}}
+{{end}}
 
 \cvsection{{"{"}}{{.MainSection.Skills.Label}}{{"}"}}
 {{- range .MainSection.Skills.Descriptions}}
