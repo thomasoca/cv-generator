@@ -58,7 +58,7 @@ const App = () => {
       .then((data) => {
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(data);
-        a.download = "file.pdf";
+        a.download = `${jsonformsData.personal_info.name}` + " Resume" + ".pdf";
         a.click();
         setLoading(false);
       })
