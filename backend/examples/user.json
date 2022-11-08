@@ -125,14 +125,13 @@
       "descriptions": [
         {
           "language": "English",
-          "fluency": 5
+          "fluency": "Fluent"
         },
         {
           "language": "Japanese",
-          "fluency": 4
+          "fluency": "Proficient"
         }
       ]
     }
   }
 }
-

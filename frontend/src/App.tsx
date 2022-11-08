@@ -58,7 +58,7 @@ const App = () => {
       .then((data) => {
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(data);
-        a.download = "file.pdf";
+        a.download = `${jsonformsData.personal_info.name}` + " Resume" + ".pdf";
         a.click();
         setLoading(false);
       })
@@ -83,10 +83,7 @@ const App = () => {
       )}
       <div className="App">
         <header className="App-header">
-          <img src="./image-logo.png" alt="logo" className="App-logo" />
-          <h1 className="App-title">
-            A not so simple way to generate your resume
-          </h1>
+          <h1 className="App-text-header">CV-Generator</h1>
         </header>
       </div>
 
@@ -117,16 +114,7 @@ const App = () => {
             />
           </div>
         </Grid>
-        <Grid item sm={6}>
-          <Button
-            className="resetbutton"
-            onClick={clearData}
-            color="primary"
-            variant="contained"
-          >
-            Clear data
-          </Button>
-          &nbsp;
+        <Grid item sm={10}>
           <Button
             className="resetbutton"
             onClick={downloadObject}
@@ -134,6 +122,15 @@ const App = () => {
             variant="contained"
           >
             Submit data & get your resume
+          </Button>
+          &nbsp;
+          <Button
+            className="resetbutton"
+            onClick={clearData}
+            color="primary"
+            variant="contained"
+          >
+            Clear data
           </Button>
         </Grid>
       </Grid>

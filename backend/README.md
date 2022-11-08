@@ -2,10 +2,6 @@
 
 A slightly modified [AltaCV](https://github.com/liantze/AltaCV) generator ReST API written in go. The original altacv latex class was written by LianTze Lim (liantze@gmail.com). The goal of this API is to simplify the creation of beautiful CV with Latex by using simple HTTP request and harnessing the power of [Go template](https://golang.org/pkg/text/template/).
 
-## Live demo website
-
-You can check the live demo of this API by accessing https://cv-generator-demo.vercel.app/. The source code for the front-end can be seen on https://github.com/thomasoca/cv-generator-demo. Feel free to add pull request or use both the API and the front-end!
-
 ## How it works
 
 I used [Go template](https://golang.org/pkg/text/template/) to write Latex file from a JSON input. Then using subprocess and [TinyTex](https://yihui.org/tinytex/) to compile the Latex output and PDF file. All of the latex output are temporarily stored at `/tmp` folder using randomized folder and file name, then it will be deleted at the end of the request, whether the request is success or failed.
@@ -157,7 +153,7 @@ The available endpoint for cv-generator is described below
         "descriptions": [
           {
             "language": "[language name: string]",
-            "fluency": "[fluency level: integer]"
+            "fluency": "[fluency level: string]"
           }
         ]
       }
@@ -180,12 +176,3 @@ The available endpoint for cv-generator is described below
     - If the error occurred on Latex/PDF generation process: `{"message": "Failed creating file"}`
     - If the error occurred on the file serving process: `{"message": "Failed processing file"}`
     - If the error occurred on the file uploading process: `{"message": "Failed sending file"}`
-
-## To-Dos
-
-- [x] ~~API documentation~~
-- [x] ~~Directly using AltaCV [github](https://github.com/liantze/AltaCV) to define Latex class in Docker~~
-- [x] ~~Dynamic CV section~~
-- [ ] User can select color schema
-- [x] ~~Live demo (frontend & backend)~~
-- [ ] Add more templates
