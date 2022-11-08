@@ -1,17 +1,24 @@
 .App {
-  text-align: center;
-  margin-bottom: 0.5em;
+  margin: 0;
+  padding-top: 0;
 }
 
 .App-logo {
   height: 60px;
 }
 
+.App-text-header {
+  font-family: Quicksand;
+  font-size: 25px;
+  padding-left: 10%;
+}
+
 .App-header {
   background-color: #222;
-  height: 180px;
-  padding: 20px;
+  display: flex;
   color: white;
+  margin-bottom: 1em;
+  width: 100%;
 }
 
 .App-title {
@@ -21,7 +28,10 @@
 .App-intro {
   font-size: large;
 }
-
+body {
+  margin: 0;
+  padding: 0;
+}
 .container: {
   padding: "1em";
   width: "100%";

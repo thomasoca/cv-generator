@@ -83,10 +83,7 @@ const App = () => {
       )}
       <div className="App">
         <header className="App-header">
-          <img src="./image-logo.png" alt="logo" className="App-logo" />
-          <h1 className="App-title">
-            A not so simple way to generate your resume
-          </h1>
+          <h1 className="App-text-header">CV-Generator</h1>
         </header>
       </div>
 
