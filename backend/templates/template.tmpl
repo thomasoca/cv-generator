@@ -122,7 +122,7 @@
 % break across pages if things get too long.
 \begin{paracol}{2}
 
-{{- if (index .MainSection.WorkExperience.Lists 0).Company}}
+{{if .MainSection.WorkExperience.Lists}}
 \cvsection{{"{"}}{{.MainSection.WorkExperience.Label}}{{"}"}}
 {{range $i, $it := .MainSection.WorkExperience.Lists}}
 {{if $i}}
@@ -137,9 +137,10 @@
 \end{itemize}
 {{end}}
 {{end}}
-{{- end}}
+{{end}}
 
 \cvsection{{"{"}}{{.MainSection.Education.Label}}{{"}"}}
+{{if .MainSection.Education.Lists}}
 {{range $i, $it := .MainSection.Education.Lists}}
 {{if $i}}
 \divider
@@ -151,6 +152,7 @@
 \item {{replaceUnescapedChar .}}
 {{end}}
 \end{itemize}
+{{end}}
 {{end}}
 {{end}}
 
