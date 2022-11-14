@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import "./App.css";
+import Header from "./Header";
 import schema from "./schema.json";
 import uischema from "./uischema.json";
 import initial from "./initial.json";
@@ -58,7 +59,7 @@ const App = () => {
       .then((data) => {
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(data);
-        a.download = `${jsonformsData.personal_info.name}` + " Resume" + ".pdf";
+        a.download = `${jsonformsData.personal_info.name} Resume.pdf`;
         a.click();
         setLoading(false);
       })
@@ -82,9 +83,7 @@ const App = () => {
         <></>
       )}
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-text-header">CV-Generator</h1>
-        </header>
+        <Header />
       </div>
 
       <Grid

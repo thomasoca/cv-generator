@@ -1,10 +1,14 @@
 {
   "name": "cv-generator-frontend",
-  "version": "0.1.0",
+  "version": "2.0.1",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.8.1",
     "@emotion/styled": "^11.8.1",
+    "@fortawesome/fontawesome": "^1.1.8",
+    "@fortawesome/fontawesome-svg-core": "^6.2.0",
+    "@fortawesome/free-brands-svg-icons": "^6.2.0",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "@jsonforms/core": "^2.5.1",
     "@jsonforms/material-renderers": "^2.5.1",
     "@jsonforms/react": "^2.5.1",

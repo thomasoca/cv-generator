@@ -1,6 +1,6 @@
 .App {
-  margin: 0;
-  padding-top: 0;
+  margin: 10;
+  padding-top: 10%;
 }
 
 .App-logo {
@@ -9,8 +9,9 @@
 
 .App-text-header {
   font-family: Quicksand;
-  font-size: 25px;
-  padding-left: 10%;
+  font-weight: 600;
+  text-align: left;
+  color: "#FFFEFE";
 }
 
 .App-header {
@@ -19,6 +20,11 @@
   color: white;
   margin-bottom: 1em;
   width: 100%;
+}
+
+.App-toolbar {
+  display: flex;
+  justify-content: space-between;
 }
 
 .App-title {
