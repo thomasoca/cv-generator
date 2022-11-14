@@ -72,6 +72,9 @@ const App = () => {
 
   return (
     <Fragment>
+      <div className="App">
+        <Header />
+      </div>
       <Loading loading={loading} />
       {visible ? (
         <Alert severity="error" onClose={onDismiss}>
@@ -82,9 +85,6 @@ const App = () => {
       ) : (
         <></>
       )}
-      <div className="App">
-        <Header />
-      </div>
 
       <Grid
         container
