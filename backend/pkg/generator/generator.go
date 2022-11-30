@@ -1,4 +1,4 @@
-package main
+package generator
 
 import (
 	"bytes"
@@ -6,13 +6,14 @@ import (
 	"io/ioutil"
 	"log"
 	"math/rand"
-	"net/url"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"strings"
 	"text/template"
 	"time"
+
+	"github.com/thomasoca/cv-generator/backend/pkg/models"
 )
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -25,13 +26,8 @@ func randSeq(n int) string {
 	return string(b)
 }
 
-func IsUrl(str string) bool {
-	u, err := url.Parse(str)
-	return err == nil && u.Scheme != "" && u.Host != ""
-}
-
 func replaceUnescapedChar(str string) string {
-	return strings.Replace(str, "_", "{\\_}", -1)
+	return strings.ReplaceAll(str, "_", "{\\_}")
 }
 
 func removeLatexFiles(env string, dirName string) {
@@ -43,7 +39,7 @@ func removeLatexFiles(env string, dirName string) {
 	}
 }
 
-func createFile(user User) (string, error) {
+func CreateFile(user models.User) (string, error) {
 	rand.Seed(time.Now().UnixNano())
 	path := os.Getenv("PROJECT_DIR")
 	if path == "" {

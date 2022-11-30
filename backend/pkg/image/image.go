@@ -1,4 +1,4 @@
-package main
+package image
 
 import (
 	"encoding/base64"
@@ -9,6 +9,7 @@ import (
 	"image/png"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"strings"
@@ -32,7 +33,12 @@ func mimeCheck(response http.Response) (string, error) {
 	return "", errors.New("the requested file does not have a proper image extension, please use .jpg or .png only")
 }
 
-func imageFromUrl(URL, dirName string) (string, error) {
+func IsUrl(str string) bool {
+	u, err := url.Parse(str)
+	return err == nil && u.Scheme != "" && u.Host != ""
+}
+
+func ImageFromUrl(URL, dirName string) (string, error) {
 	//Get the response bytes from the url
 	response, err := http.Get(URL)
 	if err != nil {
@@ -82,7 +88,7 @@ func imageWriter(imageData image.Image, dirName string, extension string) (strin
 	return imageName, err
 }
 
-func imageFromBase64(data string, dirName string) (string, error) {
+func ImageFromBase64(data string, dirName string) (string, error) {
 	coI := strings.Index(data, ",")
 	rawImage := data[coI+1:]
 	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(rawImage))

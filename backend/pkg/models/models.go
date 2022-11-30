@@ -1,4 +1,6 @@
-package main
+package models
+
+import "github.com/thomasoca/cv-generator/backend/pkg/image"
 
 // User type, based on the JSON input from the client
 type User struct {
@@ -83,9 +85,9 @@ func (u *User) Modify(dirname string) error {
 	imageData := u.PersonalInfo.Picture
 	if imageData != "" {
 		var newImage string
-		checkUrl := IsUrl(imageData)
+		checkUrl := image.IsUrl(imageData)
 		if checkUrl {
-			newImage, err := imageFromUrl(imageData, dirname)
+			newImage, err := image.ImageFromUrl(imageData, dirname)
 			if err != nil {
 				return err
 			}
@@ -93,7 +95,7 @@ func (u *User) Modify(dirname string) error {
 			return err
 		}
 
-		newImage, err := imageFromBase64(imageData, dirname)
+		newImage, err := image.ImageFromBase64(imageData, dirname)
 		if err != nil {
 			return err
 		}
