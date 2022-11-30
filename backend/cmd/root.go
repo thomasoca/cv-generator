@@ -10,7 +10,7 @@ import (
 var rootCmd = &cobra.Command{
 	Use:   "cv-generator",
 	Short: "cv-generator is an app to create a resume by using Latex template",
-	Long: `stringer is an app to create a resume by using Latex
+	Long: `cv-generator is an app to create a resume by using Latex
 		that can be run by using the webapp or simply using the CLI mode`,
 	Run: func(cmd *cobra.Command, args []string) {
 
