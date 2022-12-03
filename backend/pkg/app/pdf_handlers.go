@@ -29,7 +29,7 @@ func GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
 			}
 			return
 		}
-		fname, err := generator.CreateFile(user)
+		fname, err := generator.CreateFile(user, "pdf")
 		if err != nil {
 			w.Header().Set("Content-type", "application/json")
 			log.Println(err)

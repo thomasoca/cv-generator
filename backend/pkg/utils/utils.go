@@ -14,3 +14,10 @@ func JsonInput(fname string) []byte {
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	return byteValue
 }
+
+func RemoveFiles(dirName string) {
+	e := os.RemoveAll(dirName)
+	if e != nil {
+		panic(e)
+	}
+}
