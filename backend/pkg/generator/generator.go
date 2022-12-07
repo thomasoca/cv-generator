@@ -13,6 +13,44 @@ import (
 
 var letters = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
+type FileGenerator struct {
+	user      models.User
+	latexPath string
+	pdfPath   string
+	DirPath   string
+	fileName  string
+}
+
+func (f *FileGenerator) PathGenerator(user models.User, devMode bool) error {
+	f.user = user
+	rand.Seed(time.Now().UnixNano())
+	path, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	if !devMode {
+		// Create the file on tempdir (for prd)
+		f.fileName = randSeq(10)
+		randomTempDirName := randSeq(15)
+		f.DirPath, err = ioutil.TempDir("", randomTempDirName)
+		if err != nil {
+			return err
+		}
+	} else {
+		err := os.Mkdir("test", 0755)
+		if err != nil {
+			log.Println(err)
+			return err
+		}
+		f.fileName = "test"
+		f.DirPath = path + "/test"
+		log.Println("testing output created in ", f.DirPath)
+	}
+	f.latexPath = filepath.Join(f.DirPath, f.fileName+".tex")
+	f.pdfPath = filepath.Join(f.DirPath, f.fileName+".pdf")
+	return nil
+}
+
 func randSeq(n int) string {
 	b := make([]rune, n)
 	for i := range b {
@@ -20,43 +58,23 @@ func randSeq(n int) string {
 	}
 	return string(b)
 }
-func CreateFile(user models.User, fileType string) (string, error) {
-	var fileName, dirName string
-	rand.Seed(time.Now().UnixNano())
-	envMode := ""
-	path, err := os.Getwd()
-	if err != nil {
-		return "", err
-	}
-	switch envMode {
-	case "server":
-		// Create the file on tempdir (for prd)
-		fileName = randSeq(10)
-		randomTempDirName := randSeq(15)
-		dirName, err = ioutil.TempDir("", randomTempDirName)
-		if err != nil {
-			return "", err
-		}
-	default:
-		err := os.Mkdir("test", 0755)
-		if err != nil {
-			log.Println(err)
-		}
-		fileName = "test"
-		dirName = path + "/test"
-	}
-	latexFilePath, err := createLatexFile(user, fileName, dirName)
+
+func CreateFile(user models.User, devMode bool) (string, error) {
+	var generator FileGenerator
+
+	err := generator.PathGenerator(user, devMode)
 	if err != nil {
 		log.Println(err)
 		return "", err
 	}
-	if fileType == "pdf" {
-		pdfFileName := filepath.Join(dirName, fileName+".pdf")
-		err = createResumeFile(dirName, fileName)
-		if err != nil {
-			return "", err
-		}
-		return pdfFileName, nil
+	err = createLatexFile(generator)
+	if err != nil {
+		log.Println(err)
+		return "", err
 	}
-	return latexFilePath, nil
+	err = createResumeFile(generator)
+	if err != nil {
+		return "", err
+	}
+	return generator.pdfPath, nil
 }

@@ -10,9 +10,15 @@ import (
 
 	"github.com/thomasoca/cv-generator/backend/pkg/generator"
 	"github.com/thomasoca/cv-generator/backend/pkg/models"
+	"github.com/thomasoca/cv-generator/backend/pkg/utils"
 )
 
-func GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
+type HttpHandlers struct {
+	DevMode bool
+}
+
+func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
+	var fg generator.FileGenerator
 	switch r.Method {
 	case "POST":
 		decoder := json.NewDecoder(r.Body)
@@ -20,7 +26,6 @@ func GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
 		err := decoder.Decode(&user)
 		if err != nil {
 			w.Header().Set("Content-type", "application/json")
-			log.SetFlags(log.LstdFlags | log.Lshortfile)
 			log.Println(err)
 			w.WriteHeader(http.StatusBadRequest)
 			_, err = w.Write([]byte(`{"message": "Bad request"}`))
@@ -29,9 +34,10 @@ func GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
 			}
 			return
 		}
-		fname, err := generator.CreateFile(user, "pdf")
+		fname, err := generator.CreateFile(user, h.DevMode)
 		if err != nil {
 			w.Header().Set("Content-type", "application/json")
+			utils.RemoveFiles(fg.DirPath)
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 			_, err = w.Write([]byte(`{"message": "Failed creating file"}`))
@@ -45,6 +51,7 @@ func GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
 		f, err := os.Open(fname)
 		if err != nil {
 			w.Header().Set("Content-type", "application/json")
+			utils.RemoveFiles(fg.DirPath)
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 			_, err = w.Write([]byte(`{"message": "Failed processing file"}`))
@@ -59,6 +66,7 @@ func GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
 
 		// Stream to response
 		if _, err := io.Copy(w, f); err != nil {
+			utils.RemoveFiles(fg.DirPath)
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 			_, err = w.Write([]byte(`{"message": "Failed sending file"}`))
@@ -68,10 +76,39 @@ func GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		err = os.RemoveAll(filepath.Dir(fname))
+		if !h.DevMode {
+			err = os.RemoveAll(filepath.Dir(fname))
+			if err != nil {
+				log.Panic(err)
+			}
+		}
+	default:
+		w.Header().Set("Content-type", "application/json")
+		w.WriteHeader(http.StatusMethodNotAllowed)
+		_, err := w.Write([]byte(`{"message": "Method not allowed"}`))
 		if err != nil {
 			log.Panic(err)
 		}
+		return
+	}
+}
+
+func (h *HttpHandlers) ExampleFileHandler(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case "GET":
+		w.Header().Set("Content-type", "application/json")
+		body := utils.JsonInput("./examples/user.json")
+		_, err := w.Write(body)
+		if err != nil {
+			w.Header().Set("Content-type", "application/json")
+			log.Println(err)
+			w.WriteHeader(http.StatusInternalServerError)
+			_, err = w.Write([]byte(`{"message": "Failed processing file"}`))
+			if err != nil {
+				log.Panic(err)
+			}
+		}
+		return
 	default:
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)

@@ -7,10 +7,10 @@ import (
 	"os/exec"
 )
 
-func createResumeFile(dirname string, filename string) error {
+func createResumeFile(fg FileGenerator) error {
 	app := "pdflatex"
-	outdir := "-output-directory=" + dirname
-	cmdArgs := []string{outdir, "-interaction=nonstopmode", "-synctex=1", "-halt-on-error", filename}
+	outdir := "-output-directory=" + fg.DirPath
+	cmdArgs := []string{outdir, "-interaction=nonstopmode", "-synctex=1", "-halt-on-error", fg.latexPath}
 	var stderr bytes.Buffer
 	var out bytes.Buffer
 	cmd := exec.Command(app, cmdArgs...)

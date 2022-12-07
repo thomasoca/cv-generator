@@ -18,7 +18,7 @@ func TestImageFromUrl(t *testing.T) {
 		log.Println(err)
 	}
 	dname := localPath + "/test_image"
-	fname, err := imageFromUrl(URL, dname)
+	fname, err := ImageFromUrl(URL, dname)
 	if err != nil {
 		log.Println(err)
 		t.Errorf("image fetching process was failed")

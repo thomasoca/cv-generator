@@ -2,51 +2,42 @@ package generator
 
 import (
 	"os"
-	"path/filepath"
 	"strings"
 	"text/template"
-
-	"github.com/thomasoca/cv-generator/backend/pkg/models"
-	"github.com/thomasoca/cv-generator/backend/pkg/utils"
 )
 
 func replaceUnescapedChar(str string) string {
 	return strings.ReplaceAll(str, "_", "{\\_}")
 }
 
-func createLatexFile(user models.User, fileName string, dirName string) (string, error) {
+func createLatexFile(fg FileGenerator) error {
 	path, err := os.Getwd()
 	if err != nil {
-		return "", err
+		return err
 	}
 	templatePath := path + "/templates/template.tmpl"
 	tpl, err := template.New("template.tmpl").Funcs(template.FuncMap{"replaceUnescapedChar": replaceUnescapedChar}).ParseFiles(templatePath)
 	if err != nil {
-		return "", err
+		return err
 	}
-
-	filename := filepath.Join(dirName, fileName+".tex")
 
 	// Convert image
-	err = user.Modify(dirName)
+	err = fg.user.Modify(fg.DirPath)
 	if err != nil {
-		utils.RemoveFiles(dirName)
-		return "", err
+		return err
 	}
 
-	f, err := os.Create(filename)
+	f, err := os.Create(fg.latexPath)
 	if err != nil {
-		utils.RemoveFiles(dirName)
-		return "", err
+		return err
 	}
 	// Execute the template to the file.
-	err = tpl.Execute(f, user)
+	err = tpl.Execute(f, fg.user)
 	if err != nil {
-		utils.RemoveFiles(dirName)
-		return "", err
+		return err
 	}
 	// Close the file when done.
 	f.Close()
 
-	return filename, nil
+	return nil
 }
