@@ -21,14 +21,15 @@ type FileGenerator struct {
 	fileName  string
 }
 
-func (f *FileGenerator) PathGenerator(user models.User, devMode bool) error {
+func (f *FileGenerator) PathGenerator(user models.User, output string) error {
 	f.user = user
 	rand.Seed(time.Now().UnixNano())
 	path, err := os.Getwd()
 	if err != nil {
 		return err
 	}
-	if !devMode {
+	switch output {
+	case "server":
 		// Create the file on tempdir (for prd)
 		f.fileName = randSeq(10)
 		randomTempDirName := randSeq(15)
@@ -36,16 +37,25 @@ func (f *FileGenerator) PathGenerator(user models.User, devMode bool) error {
 		if err != nil {
 			return err
 		}
-	} else {
-		err := os.Mkdir("test", 0755)
-		if err != nil {
-			log.Println(err)
-			return err
-		}
+	case "app":
+		_ = os.Mkdir("result", 0755)
+		f.fileName = user.PersonalInfo.Name + " Resume"
+		f.DirPath = path + "/result"
+	case "development":
+		_ = os.Mkdir("test", 0755)
 		f.fileName = "test"
 		f.DirPath = path + "/test"
-		log.Println("testing output created in ", f.DirPath)
+		log.Println("testing output created at ", f.DirPath)
+	default:
+		p := output + "/result"
+		err := os.MkdirAll(p, os.ModePerm)
+		if err != nil {
+			log.Println(err)
+		}
+		f.fileName = user.PersonalInfo.Name + " Resume"
+		f.DirPath = p
 	}
+
 	f.latexPath = filepath.Join(f.DirPath, f.fileName+".tex")
 	f.pdfPath = filepath.Join(f.DirPath, f.fileName+".pdf")
 	return nil
@@ -59,10 +69,10 @@ func randSeq(n int) string {
 	return string(b)
 }
 
-func CreateFile(user models.User, devMode bool) (string, error) {
+func CreateFile(user models.User, output string) (string, error) {
 	var generator FileGenerator
 
-	err := generator.PathGenerator(user, devMode)
+	err := generator.PathGenerator(user, output)
 	if err != nil {
 		log.Println(err)
 		return "", err

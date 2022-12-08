@@ -4,6 +4,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 )
 
 func JsonInput(fname string) []byte {
@@ -15,8 +16,8 @@ func JsonInput(fname string) []byte {
 	return byteValue
 }
 
-func RemoveFiles(dirName string) {
-	e := os.RemoveAll(dirName)
+func RemoveFiles(fileName string) {
+	e := os.RemoveAll(filepath.Dir(fileName))
 	if e != nil {
 		panic(e)
 	}

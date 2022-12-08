@@ -6,7 +6,6 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 
 	"github.com/thomasoca/cv-generator/backend/pkg/generator"
 	"github.com/thomasoca/cv-generator/backend/pkg/models"
@@ -18,7 +17,7 @@ type HttpHandlers struct {
 }
 
 func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
-	var fg generator.FileGenerator
+	var o string
 	switch r.Method {
 	case "POST":
 		decoder := json.NewDecoder(r.Body)
@@ -34,10 +33,16 @@ func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Reques
 			}
 			return
 		}
-		fname, err := generator.CreateFile(user, h.DevMode)
+		switch h.DevMode {
+		case true:
+			o = "development"
+		default:
+			o = "server"
+		}
+		fname, err := generator.CreateFile(user, o)
 		if err != nil {
 			w.Header().Set("Content-type", "application/json")
-			utils.RemoveFiles(fg.DirPath)
+			utils.RemoveFiles(fname)
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 			_, err = w.Write([]byte(`{"message": "Failed creating file"}`))
@@ -51,7 +56,7 @@ func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Reques
 		f, err := os.Open(fname)
 		if err != nil {
 			w.Header().Set("Content-type", "application/json")
-			utils.RemoveFiles(fg.DirPath)
+			utils.RemoveFiles(fname)
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 			_, err = w.Write([]byte(`{"message": "Failed processing file"}`))
@@ -66,7 +71,7 @@ func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Reques
 
 		// Stream to response
 		if _, err := io.Copy(w, f); err != nil {
-			utils.RemoveFiles(fg.DirPath)
+			utils.RemoveFiles(fname)
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 			_, err = w.Write([]byte(`{"message": "Failed sending file"}`))
@@ -77,10 +82,7 @@ func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Reques
 		}
 
 		if !h.DevMode {
-			err = os.RemoveAll(filepath.Dir(fname))
-			if err != nil {
-				log.Panic(err)
-			}
+			utils.RemoveFiles(fname)
 		}
 	default:
 		w.Header().Set("Content-type", "application/json")
