@@ -40,6 +40,6 @@ func serveHttpServer(port string, mode bool) {
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
-	rootCmd.PersistentFlags().String("port", "", "Port for the http server")
-	rootCmd.PersistentFlags().Bool("development", false, "Starting the http server in development mode")
+	serveCmd.PersistentFlags().String("port", "", "Port for the http server")
+	serveCmd.PersistentFlags().Bool("development", false, "Starting the http server in development mode")
 }

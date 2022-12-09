@@ -22,12 +22,12 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
 
 ENV PATH="${PATH}:/root/bin"
 RUN fmtutil-sys --all
-ENV PROJECT_DIR /app
-ENV ENV_MODE PRD
 WORKDIR /app
 # Download altacv class from the author github
 RUN wget -q "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"
 RUN wget -q "http://tug.ctan.org/tex-archive/macros/latex/contrib/extsizes/extarticle.cls"
+# Update tlmgr
+RUN tlmgr update --self
 # install only the packages you need
 RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox \
     enumitem ifmtarg dashrule changepage multirow environ paracol lato \
@@ -36,8 +36,8 @@ RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox 
 COPY --from=builder /app/api /app/api
 COPY examples ./examples/
 ADD templates ./templates/
-COPY run.sh ./
+COPY scripts/run.sh ./
 
 RUN chmod +x run.sh
 RUN ./run.sh
-CMD ["/app/api"]
+entrypoint ["/app/api"]

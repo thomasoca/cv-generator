@@ -1,5 +1,5 @@
 # Build the Go API
-FROM golang:1.16-buster as builder
+FROM golang:1.19-buster as builder
 
 WORKDIR /app
 
@@ -31,13 +31,14 @@ RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -
 
 ENV PATH="${PATH}:/root/bin"
 RUN fmtutil-sys --all
-ENV PROJECT_DIR /app
-ENV ENV_MODE PRD
+
 WORKDIR /app
 # Download altacv class from the author github
 RUN wget -q "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"
 # Download missing class
 RUN wget -q "http://tug.ctan.org/tex-archive/macros/latex/contrib/extsizes/extarticle.cls"
+# Update tlmgr
+RUN tlmgr update --self
 # install only the packages you need
 RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox \
     enumitem ifmtarg dashrule changepage multirow environ paracol lato \
@@ -48,9 +49,9 @@ COPY --from=node_builder /app/build/ /app/build/
 RUN chmod +x ./api
 COPY /backend/examples ./examples/
 ADD /backend/templates ./templates/
-COPY /backend/run.sh ./
+COPY /backend/scripts/run.sh ./
 
 RUN chmod +x run.sh
 RUN ./run.sh
-CMD ["/app/api"]
+CMD ["/app/api", "serve"]
 

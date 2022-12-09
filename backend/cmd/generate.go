@@ -31,7 +31,7 @@ func runAppCmd(input string, output string) {
 
 func init() {
 	rootCmd.AddCommand(generateCmd)
-	rootCmd.PersistentFlags().String("input", "", "Path for the JSON input file")
-	rootCmd.PersistentFlags().String("output", "app", "Path for the output pdf and latex files")
-	rootCmd.MarkPersistentFlagRequired("input")
+	generateCmd.PersistentFlags().String("input", "", "Path for the JSON input file")
+	generateCmd.PersistentFlags().String("output", "app", "Path for the output pdf and latex files")
+	generateCmd.MarkPersistentFlagRequired("input")
 }
