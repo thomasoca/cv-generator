@@ -21,7 +21,6 @@ cv-generator serve
 Optional flags:
 
 - `--port [PORT]`: specify port to run, default at `8080`
-- `--development`: run in development mode for easier debugging
 
 ### Run as CLI app
 

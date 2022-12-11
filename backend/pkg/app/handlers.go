@@ -17,7 +17,6 @@ type HttpHandlers struct {
 }
 
 func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Request) {
-	var o string
 	switch r.Method {
 	case "POST":
 		decoder := json.NewDecoder(r.Body)
@@ -33,16 +32,12 @@ func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Reques
 			}
 			return
 		}
-		switch h.DevMode {
-		case true:
-			o = "development"
-		default:
-			o = "server"
-		}
-		fname, err := generator.CreateFile(user, o)
+		fname, err := generator.CreateFile(user, "server")
 		if err != nil {
 			w.Header().Set("Content-type", "application/json")
-			utils.RemoveFiles(fname)
+			if fname != "" {
+				utils.RemoveFiles(fname)
+			}
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
 			_, err = w.Write([]byte(`{"message": "Failed creating file"}`))
@@ -81,9 +76,7 @@ func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Reques
 			return
 		}
 
-		if !h.DevMode {
-			utils.RemoveFiles(fname)
-		}
+		utils.RemoveFiles(fname)
 	default:
 		w.Header().Set("Content-type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)

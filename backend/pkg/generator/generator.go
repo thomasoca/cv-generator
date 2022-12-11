@@ -41,11 +41,6 @@ func (f *FileGenerator) PathGenerator(user models.User, output string) error {
 		_ = os.Mkdir("result", 0755)
 		f.fileName = user.PersonalInfo.Name + " Resume"
 		f.DirPath = path + "/result"
-	case "development":
-		_ = os.Mkdir("test", 0755)
-		f.fileName = "test"
-		f.DirPath = path + "/test"
-		log.Println("testing output created at ", f.DirPath)
 	default:
 		p := output + "/result"
 		err := os.MkdirAll(p, os.ModePerm)
@@ -80,11 +75,11 @@ func CreateFile(user models.User, output string) (string, error) {
 	err = createLatexFile(generator)
 	if err != nil {
 		log.Println(err)
-		return "", err
+		return generator.latexPath, err
 	}
 	err = createResumeFile(generator)
 	if err != nil {
-		return "", err
+		return generator.pdfPath, err
 	}
 	return generator.pdfPath, nil
 }
