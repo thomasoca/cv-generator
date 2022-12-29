@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/thomasoca/cv-generator/backend/pkg/generator"
-	"github.com/thomasoca/cv-generator/backend/pkg/models"
-	"github.com/thomasoca/cv-generator/backend/pkg/utils"
+	"github.com/thomasoca/cv-generator/pkg/generator"
+	"github.com/thomasoca/cv-generator/pkg/models"
+	"github.com/thomasoca/cv-generator/pkg/utils"
 )
 
 type HttpHandlers struct {

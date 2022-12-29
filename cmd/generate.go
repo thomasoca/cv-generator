@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"github.com/thomasoca/cv-generator/backend/pkg/app"
+	"github.com/thomasoca/cv-generator/pkg/app"
 )
 
 var generateCmd = &cobra.Command{

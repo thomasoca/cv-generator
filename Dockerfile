@@ -3,10 +3,12 @@ FROM golang:1.19-buster as builder
 
 WORKDIR /app
 
-COPY ./backend/go.* ./
+COPY ./go.* ./
 RUN go mod download
 
-COPY ./backend/ ./
+COPY cmd ./cmd
+COPY pkg ./pkg
+COPY main.go ./
 
 RUN CGO_ENABLED=0 go build -mod=readonly -v -o api
 
@@ -47,9 +49,9 @@ RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox 
 COPY --from=builder /app/api /app/api
 COPY --from=node_builder /app/build/ /app/build/
 RUN chmod +x ./api
-COPY /backend/examples ./examples/
-ADD /backend/templates ./templates/
-COPY /backend/scripts/run.sh ./
+COPY examples ./examples/
+COPY templates ./templates/
+COPY scripts/run.sh ./
 
 RUN chmod +x run.sh
 RUN ./run.sh

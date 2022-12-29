@@ -1,10 +1,22 @@
 # cv-generator
 
-A web app and CLI tool to generate beautiful LaTeX resume using available open source templates (currently only serve AltaCV) by filling a simple form (or using a JSON file in CLI mode).
+A web app and CLI tool to generate beautiful LaTeX resume using available open source templates by filling a simple form (or using a JSON file in CLI mode).
 
 ## Live website
 
 https://cv-generator-40m5.onrender.com
+
+## Available templates
+* A slightly modified [AltaCV](https://github.com/liantze/AltaCV). The original altacv latex class was written by LianTze Lim (liantze@gmail.com). 
+
+### Template Modifications
+
+**(Update per AltaCV v1.6.3)**
+
+- For the altacv class, I did not use the `pdfx` and `biblatex` package, as it caused error when installed using Docker.
+- Package `pdfx` somehow is needed in order to use `withhyper` option on the document. As the bug that causes `pdfx` package error still not resolved, I discard `withhyper` option from the document class for this release version.
+- Package `trimclip` somehow is missing after the recent class update (v1.6.3), so it gets ignored for my latest version.
+- Package `accsupp` is now needed to generate PDF.
 
 ## Usage
 
