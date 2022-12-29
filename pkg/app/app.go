@@ -6,8 +6,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/thomasoca/cv-generator/backend/pkg/generator"
-	"github.com/thomasoca/cv-generator/backend/pkg/models"
+	"github.com/thomasoca/cv-generator/pkg/generator"
+	"github.com/thomasoca/cv-generator/pkg/models"
 )
 
 type AppCmd struct {

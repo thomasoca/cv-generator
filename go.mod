@@ -1,4 +1,4 @@
-module github.com/thomasoca/cv-generator/backend
+module github.com/thomasoca/cv-generator
 
 go 1.19
 

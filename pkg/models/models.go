@@ -1,6 +1,6 @@
 package models
 
-import "github.com/thomasoca/cv-generator/backend/pkg/image"
+import "github.com/thomasoca/cv-generator/pkg/image"
 
 // User type, based on the JSON input from the client
 type User struct {
