@@ -7,7 +7,8 @@ A web app and CLI tool to generate beautiful LaTeX resume using available open s
 https://cv-generator-40m5.onrender.com
 
 ## Available templates
-* A slightly modified [AltaCV](https://github.com/liantze/AltaCV). The original altacv latex class was written by LianTze Lim (liantze@gmail.com). 
+
+- A slightly modified [AltaCV](https://github.com/liantze/AltaCV). The original altacv latex class was written by LianTze Lim (liantze@gmail.com).
 
 ### Template Modifications
 
@@ -32,7 +33,7 @@ cv-generator serve
 
 Optional flags:
 
-- `--port [PORT]`: specify port to run, default at `8080`
+- `--port [PORT]`: specify port to run, default at `8170`
 
 ### Run as CLI app
 
@@ -46,13 +47,13 @@ Optional flags:
 
 ## Installation
 
-### Docker (web app)
+### Docker
 
 Make sure to install Docker in your system
 
 1. Navigate to the project roots directory, and build the Docker image `docker build -t [TAG_NAME] .`
-2. Run the image and bind the port, i.e. on port 8080 `docker run -p 8080:8080 [TAG_NAME]`
-3. Navigate to `localhost:8080` or any other ports that defined in the previous step
+2. Run the image and bind the port, i.e. on port 8080 `docker run -p 8170:8170 [TAG_NAME]`
+3. Navigate to `localhost:8170` or any other ports that defined in the previous step
 
 ### Local Installation
 

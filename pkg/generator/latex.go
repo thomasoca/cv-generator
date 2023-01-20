@@ -7,7 +7,17 @@ import (
 )
 
 func replaceUnescapedChar(str string) string {
-	return strings.ReplaceAll(str, "_", "{\\_}")
+	s := strings.NewReplacer(
+		"_", "{\\_}",
+		"#", "{\\#}",
+		"%", "{\\%}",
+		"&", "{\\&}",
+		"$", "{\\$}",
+		"{", "{\\{}",
+		"}", "{\\}}",
+	)
+
+	return s.Replace(str)
 }
 
 func createLatexFile(fg FileGenerator) error {
