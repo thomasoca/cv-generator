@@ -46,6 +46,17 @@
     "main_section": {
       "type": "object",
       "properties": {
+        "about_me": {
+          "type": "object",
+          "properties": {
+            "label": {
+              "type": "string"
+            },
+            "descriptions": {
+              "type": "string"
+            }
+          }
+        },
         "work_experience": {
           "type": "object",
           "properties": {
@@ -217,7 +228,7 @@
                       },
                       {
                         "const": "Beginner",
-                        "title": "Begineer"
+                        "title": "Beginner"
                       }
                     ]
                   }

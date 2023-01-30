@@ -69,6 +69,28 @@
     },
     {
       "type": "Category",
+      "label": "About Me",
+      "elements": [
+        {
+          "type": "VerticalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/about_me/properties/label"
+            },
+            {
+              "type": "Control",
+              "scope": "#/properties/main_section/properties/about_me/properties/descriptions",
+              "options": {
+                "multi": true
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
       "label": "Work Experience",
       "elements": [
         {
