@@ -74,65 +74,65 @@ const App = () => {
     <Fragment>
       <div className="App">
         <Header />
-      </div>
-      <Loading loading={loading} />
-      {visible ? (
-        <Alert severity="error" onClose={onDismiss}>
-          <AlertTitle>Error</AlertTitle>
-          {errorMessage} —{" "}
-          <strong>please check your input or try again later</strong>
-        </Alert>
-      ) : (
-        <></>
-      )}
+        <Loading loading={loading} />
+        {visible ? (
+          <Alert severity="error" onClose={onDismiss}>
+            <AlertTitle>Error</AlertTitle>
+            {errorMessage} —{" "}
+            <strong>please check your input or try again later</strong>
+          </Alert>
+        ) : (
+          <></>
+        )}
 
-      <Grid
-        container
-        justifyContent={"center"}
-        spacing={1}
-        className="container"
-      >
-        <Grid item sm={10}>
-          <Typography
-            variant={"h5"}
-            sx={{
-              textAlign: "center",
-              padding: "0.25em",
-            }}
-          >
-            Fill the form to make your resume
-          </Typography>
-          <div className="demoform">
-            <JsonForms
-              schema={schema}
-              uischema={uischema}
-              data={jsonformsData}
-              renderers={renderers}
-              cells={materialCells}
-              onChange={({ errors, data }) => setJsonformsData(data)}
-            />
-          </div>
+        <Grid
+          container
+          justifyContent={"center"}
+          spacing={1}
+          className="container"
+        >
+          <Grid item sm={10}>
+            <Typography
+              variant={"h5"}
+              sx={{
+                textAlign: "center",
+                padding: "0.25em",
+              }}
+            >
+              Fill the form to make your resume
+            </Typography>
+            <div className="demoform">
+              <JsonForms
+                schema={schema}
+                uischema={uischema}
+                data={jsonformsData}
+                renderers={renderers}
+                cells={materialCells}
+                onChange={({ errors, data }) => setJsonformsData(data)}
+              />
+            </div>
+          </Grid>
+          <Grid item sm={10}>
+            <Button
+              className="resetbutton"
+              onClick={downloadObject}
+              color="primary"
+              variant="contained"
+            >
+              Submit data & get your resume
+            </Button>
+            &nbsp;
+            <Button
+              className="resetbutton"
+              onClick={clearData}
+              color="primary"
+              variant="contained"
+            >
+              Clear data
+            </Button>
+          </Grid>
         </Grid>
-        <Grid item sm={10}>
-          <Button
-            className="resetbutton"
-            onClick={downloadObject}
-            color="primary"
-            variant="contained"
-          >
-            Submit data & get your resume
-          </Button>
-          &nbsp;
-          <Button
-            className="resetbutton"
-            onClick={clearData}
-            color="primary"
-            variant="contained"
-          >
-            Clear data
-          </Button>
-        </Grid>
-      </Grid>
+      </div>
     </Fragment>
   );
 };

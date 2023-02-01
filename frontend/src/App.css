@@ -1,6 +1,5 @@
 .App {
-  margin: 10;
-  padding-top: 10%;
+  padding: 5em;
 }
 
 .App-logo {
@@ -39,8 +38,8 @@ body {
   padding: 0;
 }
 .container {
-  padding: "1em";
-  width: "100%";
+  padding: 1px;
+  width: 20%;
 }
 .title {
   text-align: "center";
@@ -59,5 +58,5 @@ body {
 }
 .demoform {
   margin: "auto";
-  padding: "1rem";
+  padding: 1px;
 }
