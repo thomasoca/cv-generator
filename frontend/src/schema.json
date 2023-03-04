@@ -55,7 +55,8 @@
             "descriptions": {
               "type": "string"
             }
-          }
+          },
+          "required": ["label"]
         },
         "work_experience": {
           "type": "object",
@@ -93,7 +94,8 @@
                 }
               }
             }
-          }
+          },
+          "required": ["label"]
         },
         "education": {
           "type": "object",
@@ -137,7 +139,8 @@
                 }
               }
             }
-          }
+          },
+          "required": ["label"]
         },
         "extracurricular": {
           "type": "object",
@@ -175,7 +178,8 @@
                 }
               }
             }
-          }
+          },
+          "required": ["label"]
         },
         "skills": {
           "type": "object",
@@ -190,7 +194,8 @@
                 "type": "string"
               }
             }
-          }
+          },
+          "required": ["label"]
         },
         "languages": {
           "type": "object",
@@ -235,7 +240,8 @@
                 }
               }
             }
-          }
+          },
+          "required": ["label"]
         },
         "projects": {
           "type": "object",
@@ -267,7 +273,8 @@
                 }
               }
             }
-          }
+          },
+          "required": ["label"]
         }
       }
     }
