@@ -29,9 +29,9 @@ const App = () => {
   const [jsonformsData, setJsonformsData] = useState<any>(initialData);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState<string | undefined>("");
   const onDismiss = () => setVisible(false);
-
+  const [error, setError] = useState<string | undefined>("");
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(jsonformsData, null, 2));
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
@@ -42,32 +42,38 @@ const App = () => {
   };
 
   const downloadObject = () => {
-    setLoading(true);
-    fetch("/api/v1/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: displayDataAsString,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          return response.json().then((text) => {
-            throw new Error(text.message);
-          });
-        }
-        return response.blob();
+    if (typeof error === "undefined" || error.trim().length === 0) {
+      setVisible(false);
+      setLoading(true);
+      fetch("/api/v1/generate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: displayDataAsString,
       })
-      .then((data) => {
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(data);
-        a.download = `${jsonformsData.personal_info.name} Resume.pdf`;
-        a.click();
-        setLoading(false);
-      })
-      .catch((err): void => {
-        setLoading(false);
-        setVisible(true);
-        setErrorMessage(err.message);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            return response.json().then((text) => {
+              throw new Error(text.message);
+            });
+          }
+          return response.blob();
+        })
+        .then((data) => {
+          var a = document.createElement("a");
+          a.href = window.URL.createObjectURL(data);
+          a.download = `${jsonformsData.personal_info.name} Resume.pdf`;
+          a.click();
+          setLoading(false);
+        })
+        .catch((err): void => {
+          setLoading(false);
+          setVisible(true);
+          setErrorMessage(err.message);
+        });
+    } else {
+      setVisible(true);
+      setErrorMessage(error);
+    }
   };
 
   return (
@@ -108,7 +114,12 @@ const App = () => {
                 data={jsonformsData}
                 renderers={renderers}
                 cells={materialCells}
-                onChange={({ errors, data }) => setJsonformsData(data)}
+                onChange={({ errors, data }) => {
+                  setJsonformsData(data);
+                  setError(
+                    errors?.map((err) => err.message)[errors.length - 1]
+                  );
+                }}
               />
             </div>
           </Grid>
