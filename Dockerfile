@@ -44,7 +44,7 @@ RUN tlmgr update --self
 # install only the packages you need
 RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox \
     enumitem ifmtarg dashrule changepage multirow environ paracol lato \
-    fontaxes accsupp
+    fontaxes accsupp tikzfill
 
 COPY --from=builder /app/api /app/api
 COPY --from=node_builder /app/build/ /app/build/
