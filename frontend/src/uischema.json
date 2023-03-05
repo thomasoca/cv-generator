@@ -104,6 +104,7 @@
               "type": "Control",
               "scope": "#/properties/main_section/properties/work_experience/properties/lists",
               "options": {
+                "showSortButtons": "true",
                 "elementLabelProp": "company",
                 "detail": {
                   "type": "VerticalLayout",
@@ -161,6 +162,7 @@
               "scope": "#/properties/main_section/properties/education/properties/lists",
               "options": {
                 "elementLabelProp": "institution",
+                "showSortButtons": "true",
                 "detail": {
                   "type": "VerticalLayout",
                   "elements": [
@@ -230,6 +232,7 @@
               "scope": "#/properties/main_section/properties/extracurricular/properties/lists",
               "options": {
                 "elementLabelProp": "institution",
+                "showSortButtons": "true",
                 "detail": {
                   "type": "VerticalLayout",
                   "elements": [
@@ -286,6 +289,7 @@
               "scope": "#/properties/main_section/properties/projects/properties/lists",
               "options": {
                 "elementLabelProp": "title",
+                "showSortButtons": "true",
                 "detail": {
                   "type": "VerticalLayout",
                   "elements": [
@@ -335,7 +339,10 @@
             },
             {
               "type": "Control",
-              "scope": "#/properties/main_section/properties/skills/properties/descriptions"
+              "scope": "#/properties/main_section/properties/skills/properties/descriptions",
+              "options": {
+                "showSortButtons": "true"
+              }
             }
           ]
         }
@@ -357,6 +364,7 @@
               "scope": "#/properties/main_section/properties/languages/properties/descriptions",
               "options": {
                 "elementLabelProp": "language",
+                "showSortButtons": "true",
                 "detail": {
                   "type": "VerticalLayout",
                   "elements": [
