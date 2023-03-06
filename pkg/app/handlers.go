@@ -66,6 +66,7 @@ func (h *HttpHandlers) GenerateFileHandler(w http.ResponseWriter, r *http.Reques
 
 		// Stream to response
 		if _, err := io.Copy(w, f); err != nil {
+			w.Header().Set("Content-type", "application/json")
 			utils.RemoveFiles(fname)
 			log.Println(err)
 			w.WriteHeader(http.StatusInternalServerError)
