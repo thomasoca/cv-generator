@@ -115,3 +115,13 @@ func (h *HttpHandlers) ExampleFileHandler(w http.ResponseWriter, r *http.Request
 		return
 	}
 }
+
+func (h *HttpHandlers) HealthCheckHandler(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	log.Println(w, "OK")
+}
