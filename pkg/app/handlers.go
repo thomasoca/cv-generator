@@ -125,6 +125,7 @@ func (h *HttpHandlers) HealthCheckHandler(w http.ResponseWriter, r *http.Request
 	if !check {
 		log.Printf("Server is not healthy")
 		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 	w.WriteHeader(http.StatusOK)
 	log.Println(w, "OK")
