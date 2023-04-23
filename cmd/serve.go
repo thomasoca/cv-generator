@@ -25,6 +25,7 @@ func serveHttpServer(port string) {
 	mux.Handle("/", http.FileServer(http.Dir("./build")))
 	mux.HandleFunc("/api/v1/generate", handlers.GenerateFileHandler)
 	mux.HandleFunc("/api/v1/example", handlers.ExampleFileHandler)
+	mux.HandleFunc("/health", handlers.HealthCheckHandler)
 	if port == "" {
 		port = "8170"
 		log.Printf("defaulting to port %s", port)
