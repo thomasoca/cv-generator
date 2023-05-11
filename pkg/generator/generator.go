@@ -83,8 +83,3 @@ func CreateFile(user models.User, output string) (string, error) {
 	}
 	return generator.pdfPath, nil
 }
-
-func HealthCheck() bool {
-	err := checkVersion()
-	return err == nil
-}

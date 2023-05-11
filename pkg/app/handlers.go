@@ -121,8 +121,8 @@ func (h *HttpHandlers) HealthCheckHandler(w http.ResponseWriter, r *http.Request
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	check := generator.HealthCheck()
-	if !check {
+	err := generator.CheckVersion()
+	if err != nil {
 		log.Printf("Server is not healthy")
 		w.WriteHeader(http.StatusInternalServerError)
 		return

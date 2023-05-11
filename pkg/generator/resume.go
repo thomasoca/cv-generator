@@ -26,7 +26,7 @@ func createResumeFile(fg FileGenerator) error {
 	return err
 }
 
-func checkVersion() error {
+func CheckVersion() error {
 	var stderr bytes.Buffer
 	var out bytes.Buffer
 	cmd := exec.Command("pdflatex", "--version")
