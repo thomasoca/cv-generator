@@ -19,10 +19,12 @@ type FileGenerator struct {
 	pdfPath   string
 	DirPath   string
 	fileName  string
+	output    string
 }
 
 func (f *FileGenerator) PathGenerator(user models.User, output string) error {
 	f.user = user
+	f.output = output
 	rand.Seed(time.Now().UnixNano())
 	path, err := os.Getwd()
 	if err != nil {

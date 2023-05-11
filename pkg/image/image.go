@@ -38,12 +38,12 @@ func IsUrl(str string) bool {
 	return err == nil && u.Scheme != "" && u.Host != ""
 }
 
-func IsDirectory(path string) bool {
+func IsImageFileExist(path string) bool {
 	info, err := os.Stat(path)
 	if err != nil {
 		return false
 	}
-	return info.IsDir()
+	return !info.IsDir()
 }
 
 func ImageFromUrl(URL, dirName string) (string, error) {
