@@ -37,5 +37,5 @@ func serveHttpServer(port string) {
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
-	serveCmd.PersistentFlags().String("port", "", "Port for the http server")
+	serveCmd.PersistentFlags().StringP("port", "p", "", "Port for the http server")
 }

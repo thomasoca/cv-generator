@@ -28,7 +28,6 @@ func (a *AppCmd) GenerateFile() (string, error) {
 	json.Unmarshal(b, &user)
 	f, err := generator.CreateFile(user, a.OutputPath)
 	if err != nil {
-		log.Println(err)
 		return "", err
 	}
 	return f, nil
