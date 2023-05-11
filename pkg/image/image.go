@@ -38,6 +38,14 @@ func IsUrl(str string) bool {
 	return err == nil && u.Scheme != "" && u.Host != ""
 }
 
+func IsDirectory(path string) bool {
+	info, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return info.IsDir()
+}
+
 func ImageFromUrl(URL, dirName string) (string, error) {
 	//Get the response bytes from the url
 	response, err := http.Get(URL)
