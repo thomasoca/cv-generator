@@ -12,7 +12,7 @@ func TestImageFromUrl(t *testing.T) {
 	if err != nil {
 		log.Println(err)
 	}
-	URL := "https://trimelive.com/wp-content/uploads/2020/12/Gambar-wa-12.jpg"
+	URL := "https://picsum.photos/200/300"
 	err = os.Mkdir("test_image", 0755)
 	if err != nil {
 		log.Println(err)
@@ -38,5 +38,21 @@ func TestImageFromUrl(t *testing.T) {
 	err = os.RemoveAll(filepath.Dir(fname))
 	if err != nil {
 		log.Panic(err)
+	}
+}
+
+func TestIsUrl(t *testing.T) {
+	url := "https://localhost:8170/test.jpg"
+	check := IsUrl(url)
+	if !check {
+		t.Errorf("URL checking was incorrect, got: false, want: true")
+	}
+}
+
+func TestIsDirectory(t *testing.T) {
+	path1 := "/home/thomasoca/Documents/important/foto.jpg"
+	check := IsImageFileExist(path1)
+	if check {
+		t.Errorf("directory checking was incorrect, got: true, want: false")
 	}
 }

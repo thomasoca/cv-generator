@@ -23,7 +23,7 @@ func runAppCmd(input string, output string) {
 	a := app.AppCmd{InputPath: input, OutputPath: output}
 	o, err := a.GenerateFile()
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Whoops. There was an error while executing your CLI '%s' ", err)
+		fmt.Fprintf(os.Stderr, "Whoops. There was an error while executing your CLI : '%s' ", err)
 		os.Exit(1)
 	}
 	fmt.Printf("Resume successfully generated on %s", o)
@@ -31,7 +31,7 @@ func runAppCmd(input string, output string) {
 
 func init() {
 	rootCmd.AddCommand(generateCmd)
-	generateCmd.PersistentFlags().String("input", "", "Path for the JSON input file")
-	generateCmd.PersistentFlags().String("output", "app", "Path for the output pdf and latex files")
+	generateCmd.PersistentFlags().StringP("input", "i", "", "Path for the JSON input file")
+	generateCmd.PersistentFlags().StringP("output", "o", "app", "Path for the output pdf and latex files")
 	generateCmd.MarkPersistentFlagRequired("input")
 }

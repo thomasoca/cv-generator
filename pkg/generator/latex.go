@@ -32,7 +32,7 @@ func createLatexFile(fg FileGenerator) error {
 	}
 
 	// Convert image
-	err = fg.user.Modify(fg.DirPath)
+	err = fg.user.Modify(fg.DirPath, fg.output)
 	if err != nil {
 		return err
 	}

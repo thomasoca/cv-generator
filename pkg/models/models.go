@@ -1,6 +1,10 @@
 package models
 
-import "github.com/thomasoca/cv-generator/pkg/image"
+import (
+	"errors"
+
+	"github.com/thomasoca/cv-generator/pkg/image"
+)
 
 // User type, based on the JSON input from the client
 type User struct {
@@ -81,7 +85,7 @@ type User struct {
 }
 
 // Modify will change the value of the profile picture section into directory to the image file
-func (u *User) Modify(dirname string) error {
+func (u *User) Modify(dirname string, output string) error {
 	imageData := u.PersonalInfo.Picture
 	if imageData != "" {
 		var newImage string
@@ -93,6 +97,14 @@ func (u *User) Modify(dirname string) error {
 			}
 			u.PersonalInfo.Picture = newImage
 			return err
+		}
+
+		if output == "app" && image.IsImageFileExist(imageData) {
+			return nil
+		}
+
+		if output == "app" && !image.IsImageFileExist(imageData) {
+			return errors.New("directory or files not exist")
 		}
 
 		newImage, err := image.ImageFromBase64(imageData, dirname)
