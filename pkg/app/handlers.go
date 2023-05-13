@@ -103,6 +103,7 @@ func (h *HttpHandlers) ExampleFileHandler(w http.ResponseWriter, r *http.Request
 			if err != nil {
 				log.Panic(err)
 			}
+			return
 		}
 		return
 	default:
