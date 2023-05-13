@@ -125,8 +125,12 @@ func (h *HttpHandlers) HealthCheckHandler(w http.ResponseWriter, r *http.Request
 	if err != nil {
 		log.Printf("Server is not healthy")
 		w.WriteHeader(http.StatusInternalServerError)
+		w.Header().Set("Content-type", "application/json")
+		_, err = w.Write([]byte(`{"message": "Failed processing file"}`))
+		if err != nil {
+			log.Panic(err)
+		}
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	log.Println(w, "OK")
 }
