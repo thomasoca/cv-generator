@@ -38,6 +38,5 @@ func CheckVersion() error {
 		log.Println(out.String())
 		return errors.New("latex backend not available")
 	}
-	log.Println("Latex backend available")
 	return err
 }
