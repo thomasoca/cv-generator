@@ -15,9 +15,9 @@ func replaceUnescapedChar(str string) string {
 		"$", "{\\$}",
 		"{", "{\\{}",
 		"}", "{\\}}",
-		"\\", "\\textbackslash",
-		"^", "\\textasciicircum",
-		"~", "\\textasciitilde",
+		"\\", "{\\textbackslash}",
+		"^", "{\\textasciicircum}",
+		"~", "{\\textasciitilde}",
 	)
 
 	return s.Replace(str)
