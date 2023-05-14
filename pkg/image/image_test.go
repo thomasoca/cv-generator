@@ -49,10 +49,10 @@ func TestIsUrl(t *testing.T) {
 	}
 }
 
-func TestIsDirectory(t *testing.T) {
+func TestIsFile(t *testing.T) {
 	path1 := "/home/thomasoca/Documents/important/foto.jpg"
 	check := IsImageFileExist(path1)
-	if check {
+	if !check {
 		t.Errorf("directory checking was incorrect, got: true, want: false")
 	}
 }
