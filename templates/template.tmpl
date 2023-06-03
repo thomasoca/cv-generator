@@ -176,7 +176,7 @@
 \switchcolumn
 \cvsection{{"{"}}{{.MainSection.AboutMe.Label}}{{"}"}}
 \begin{quote}
-  {{.MainSection.AboutMe.Descriptions}}
+  {{replaceUnescapedChar .MainSection.AboutMe.Descriptions}}
 \end{quote}
 
 {{if .MainSection.Projects.Lists}}
@@ -194,7 +194,7 @@
 
 \cvsection{{"{"}}{{.MainSection.Skills.Label}}{{"}"}}
 {{- range .MainSection.Skills.Descriptions}}
-\cvtag{{"{"}}{{. -}}{{"}"}}
+\cvtag{{"{"}}{{replaceUnescapedChar . -}}{{"}"}}
 {{- end}}
 
 \cvsection{{"{"}}{{.MainSection.Languages.Label}}{{"}"}}
