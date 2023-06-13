@@ -7,6 +7,7 @@ import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
 import "./App.css";
 import Header from "./Header";
+import Footer from "./Footer";
 import schema from "./schema.json";
 import uischema from "./uischema.json";
 import initial from "./initial.json";
@@ -143,6 +144,7 @@ const App = () => {
             </Button>
           </Grid>
         </Grid>
+        <Footer />
       </div>
     </Fragment>
   );
