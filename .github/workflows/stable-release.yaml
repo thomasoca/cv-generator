@@ -1,11 +1,10 @@
-name: Deploy to production environment
+name: Push stable release image
 
-# Run workflow on every push to main branch.
-# This workflow will build docker image with latest tag and push it to container registry
+# Run workflow on every new stable release tag
+# This workflow will build docker image with stable tag and push it to container registry
 on:
-  push:
-    branches: [main]
-  workflow_dispatch: # So it can be triggered manually if needed
+  release:
+    types: [published]
 
 env:
   IMAGE_NAME: cv-generator
@@ -34,11 +33,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_REPOSITORY }}/${{ env.IMAGE_NAME }}:latest
-
-      - name: Trigger Render API to start the production deployment
-        uses: johnbeynon/render-deploy-action@v0.0.8
-        with:
-          service-id: ${{ secrets.RENDER_SERVICE_NAME }}
-          api-key: ${{ secrets.RENDER_API_KEY }}
-
+          tags: ${{ env.GHCR_REGISTRY }}/${{ env.GHCR_REPOSITORY }}/${{ env.IMAGE_NAME }}:stable
