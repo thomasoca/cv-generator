@@ -42,35 +42,31 @@ const App = () => {
     setJsonformsData({});
   };
 
-  const downloadObject = () => {
+  const downloadObject = async (): Promise<void> => {
     if (typeof error === "undefined" || error.trim().length === 0) {
       setVisible(false);
       setLoading(true);
-      fetch("/api/v1/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: displayDataAsString,
-      })
-        .then((response) => {
-          if (!response.ok) {
-            return response.json().then((text) => {
-              throw new Error(text.message);
-            });
-          }
-          return response.blob();
-        })
-        .then((data) => {
-          var a = document.createElement("a");
-          a.href = window.URL.createObjectURL(data);
-          a.download = `${jsonformsData.personal_info.name} Resume.pdf`;
-          a.click();
-          setLoading(false);
-        })
-        .catch((err): void => {
-          setLoading(false);
-          setVisible(true);
-          setErrorMessage(err.message);
+      try {
+        const response = await fetch("/api/v1/generate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: displayDataAsString,
         });
+        if (!response.ok) {
+          const text = await response.json();
+          throw new Error(text.message);
+        }
+        const data = await response.blob();
+        const a = document.createElement("a");
+        a.href = window.URL.createObjectURL(data);
+        a.download = `${jsonformsData.personal_info.name} Resume.pdf`;
+        a.click();
+        setLoading(false);
+      } catch (err: any) {
+        setLoading(false);
+        setVisible(true);
+        setErrorMessage(err.message);
+      }
     } else {
       setVisible(true);
       setErrorMessage(error);
