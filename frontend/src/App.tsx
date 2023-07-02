@@ -56,12 +56,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginBottom: theme.spacing(2),
   },
-  formContainer: {
-    padding: theme.spacing(2),
-  },
-  button: {
-    margin: theme.spacing(1),
-  },
 }));
 const App = () => {
   const classes = useStyles();
@@ -149,7 +143,6 @@ const App = () => {
         ) : (
           <></>
         )}
-
         <Grid
           container
           justifyContent={"center"}
@@ -169,7 +162,7 @@ const App = () => {
             <div className={classes.root}>
               <Grid container spacing={2}>
                 <Grid item xs={6}>
-                  <div className={classes.formContainer}>
+                  <div>
                     <JsonForms
                       schema={schema}
                       uischema={uischema}
@@ -191,7 +184,7 @@ const App = () => {
                       color="primary"
                       variant="contained"
                     >
-                      Submit data & get your resume
+                      Create your resume
                     </Button>
                     &nbsp;
                     <Button
@@ -202,46 +195,49 @@ const App = () => {
                     >
                       Clear data
                     </Button>
-                  </Grid>{" "}
+                  </Grid>
                 </Grid>
                 <Grid item xs={6}>
-                  {loading && <div>Loading...</div>}
-                  {error && <div>Error loading PDF!</div>}
-                  {pdfBlob && (
-                    <div className={classes.pdfContainer}>
-                      <div className={classes.navigationContainer}>
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
-                          onClick={goToPrevPage}
-                          disabled={currentPage === 1}
-                          startIcon={<KeyboardArrowLeft />}
-                        ></Button>
-                        &nbsp;
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
-                          onClick={goToNextPage}
-                          disabled={currentPage === numPages}
-                          endIcon={<KeyboardArrowRight />}
-                        ></Button>
-                        &nbsp;
-                        <Button
-                          variant="contained"
-                          color="primary"
-                          className={classes.button}
-                          onClick={handleDownload}
-                          startIcon={<GetApp />}
-                        >
-                          PDF
-                        </Button>
-                      </div>
+                  <div className={classes.pdfContainer}>
+                    <div className={classes.navigationContainer}>
+                      <Button
+                        variant="text"
+                        color="primary"
+                        className="resetbutton"
+                        onClick={goToPrevPage}
+                        disabled={currentPage === 1 || !pdfBlob}
+                        startIcon={<KeyboardArrowLeft />}
+                      />
+                      &nbsp;
+                      <Button
+                        variant="text"
+                        color="primary"
+                        className="resetbutton"
+                        onClick={goToNextPage}
+                        disabled={currentPage === numPages || !pdfBlob}
+                        endIcon={<KeyboardArrowRight />}
+                      />
+                      &nbsp;
+                      <Button
+                        variant="text"
+                        color="primary"
+                        className="resetbutton"
+                        onClick={handleDownload}
+                        disabled={!pdfBlob}
+                        startIcon={<GetApp />}
+                      >
+                        PDF
+                      </Button>
+                    </div>
+                    {!pdfBlob && <div>Your resume will be shown here</div>}
+                    {pdfBlob && (
                       <div>
+                        {loading && <div>Loading...</div>}
+                        {error && <div>Error loading PDF!</div>}
                         <Document
                           file={pdfBlob}
                           onLoadSuccess={onDocumentLoadSuccess}
+                          renderMode="svg"
                         >
                           <Page
                             pageNumber={currentPage}
@@ -249,14 +245,16 @@ const App = () => {
                             renderTextLayer={false}
                           />
                         </Document>
+                        &nbsp;
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </Grid>
               </Grid>
             </div>
           </Grid>
         </Grid>
+        &nbsp;
         <Footer />
       </div>
     </Fragment>
