@@ -1,5 +1,5 @@
 .App {
-  padding: 5em;
+  padding-top: 5em;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -41,7 +41,7 @@ body {
   padding: 0;
 }
 .container {
-  padding: 1px;
+  padding-top: 1px;
   width: 20%;
 }
 .title {
