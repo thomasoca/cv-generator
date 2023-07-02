@@ -237,7 +237,6 @@ const App = () => {
                         <Document
                           file={pdfBlob}
                           onLoadSuccess={onDocumentLoadSuccess}
-                          renderMode="svg"
                         >
                           <Page
                             pageNumber={currentPage}
