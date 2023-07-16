@@ -24,7 +24,11 @@ https://cv-generator-40m5.onrender.com
 ```sh
 cv-generator [command] [flag]
 ```
+### Install Latex dependencies
 
+```sh 
+cv-generator install
+```
 ### Run as webserver
 
 ```sh
@@ -51,13 +55,15 @@ Optional flags:
 
 Make sure to install Docker in your system
 
-1. Navigate to the project roots directory, and build the Docker image `docker build -t [TAG_NAME] .`
+1. Pull the latest image from the registry by running `docker pull ghcr.io/thomasoca/cv-generator:latest`
 2. Run the image and bind the port, i.e. on port 8080 `docker run -p 8170:8170 [TAG_NAME]`
 3. Navigate to `localhost:8170` or any other ports that defined in the previous step
 
 ### Local Installation
-
+#### Installation from source 
 1. Install go >= 1.16,
-2. Run the LaTeX [installation script](./backend/scripts/setup_latex.sh)
-3. Run `export PATH=$PATH:/[YOUR_HOME_DIR]/bin` to make sure that `pdflatex` is executable
-4. Run the CLI app in webserver mode or local mode
+2. Clone this repository or download the compressed file in the [release](https://github.com/thomasoca/cv-generator/releases) section
+3. [Compile and install](https://go.dev/doc/tutorial/compile-install) the application
+4. Run the install command `cv-generator install`
+5. Run `export PATH=$PATH:/[YOUR_HOME_DIR]/bin` to make sure that `pdflatex` and `tlmgr` is executable
+6. Run the CLI app in webserver mode or local mode

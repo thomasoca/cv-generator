@@ -6,3 +6,4 @@
 *.tex
 *.pdf
 /result
+*.log
