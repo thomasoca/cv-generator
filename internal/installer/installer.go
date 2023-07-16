@@ -65,7 +65,7 @@ func InstallPrerequisite() error {
 
 	// Check if pdflatex is installed
 	fmt.Println("Checking Latex executables....")
-	if err := utils.RunCommand("pdflatex", "--version"); err != nil {
+	if err := utils.RunCommand("pdflatex", nil, nil, "--version"); err != nil {
 		if runtime.GOOS == "linux" {
 			fmt.Println("pdflatex is not installed, starting TinyTex installation process....")
 
@@ -78,7 +78,7 @@ func InstallPrerequisite() error {
 			fmt.Println("install-bin-unix.sh downloaded successfully.")
 
 			// Execute the TinyTex installation script
-			if err := utils.RunCommand("sh", "install-bin-unix.sh"); err != nil {
+			if err := utils.RunCommand("sh", nil, nil, "install-bin-unix.sh"); err != nil {
 				fmt.Println("Failed to install TinyTex:", err)
 				return err
 			}
@@ -100,7 +100,7 @@ func InstallPrerequisite() error {
 				"environ", "paracol", "lato", "fontaxes", "accsupp", "extsizes", "pdfx",
 				"colorprofiles", "xmpincl", "adjustbox", "collectbox",
 			}
-			if err := utils.RunCommand("tlmgr", append([]string{"install"}, packages...)...); err != nil {
+			if err := utils.RunCommand("tlmgr", nil, nil, append([]string{"install"}, packages...)...); err != nil {
 				fmt.Println("Failed to install packages:", err)
 				return err
 			}

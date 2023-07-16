@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"bytes"
 	"io/ioutil"
 	"log"
 	"os"
@@ -24,9 +25,17 @@ func RemoveFiles(fileName string) {
 	}
 }
 
-func RunCommand(command string, args ...string) error {
+func RunCommand(command string, stdout, stderr *bytes.Buffer, args ...string) error {
 	cmd := exec.Command(command, args...)
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	if stdout != nil {
+		cmd.Stdout = stdout
+	} else {
+		cmd.Stdout = os.Stdout
+	}
+	if stderr != nil {
+		cmd.Stderr = stderr
+	} else {
+		cmd.Stderr = os.Stderr
+	}
 	return cmd.Run()
 }
