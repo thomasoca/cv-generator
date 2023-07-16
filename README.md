@@ -56,12 +56,12 @@ Optional flags:
 Make sure to install Docker in your system
 
 1. Pull the latest image from the registry by running `docker pull ghcr.io/thomasoca/cv-generator:latest`
-2. Run the image and bind the port, i.e. on port 8080 `docker run -p 8170:8170 [TAG_NAME]`
-3. Navigate to `localhost:8170` or any other ports that defined in the previous step
+2. To run the image as web server, bind the port, i.e. on port 8170 and run `docker run -p 8170:8170 cv-generator serve`
+3. To run the image as local file generator, simply run `docker run cv-generator generate --input [INPUT_FILE] --output [OUTPUT_FILE]`
 
 ### Local Installation
 #### Installation from source 
-1. Install go >= 1.16,
+1. Install go >= 1.16
 2. Clone this repository or download the compressed file in the [release](https://github.com/thomasoca/cv-generator/releases) section
 3. [Compile and install](https://go.dev/doc/tutorial/compile-install) the application
 4. Run the install command `cv-generator install`

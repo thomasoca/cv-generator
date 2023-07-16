@@ -1,4 +1,4 @@
-# Build the Go API
+# Build the Go cv-generator
 FROM golang:1.19-buster as builder
 
 WORKDIR /app
@@ -8,9 +8,10 @@ RUN go mod download
 
 COPY cmd ./cmd
 COPY pkg ./pkg
+COPY internal ./internal
 COPY main.go ./
 
-RUN CGO_ENABLED=0 go build -mod=readonly -v -o api
+RUN CGO_ENABLED=0 go build -mod=readonly -v -o cv-generator
 
 # Build the React application
 FROM node:alpine AS node_builder
@@ -26,34 +27,19 @@ FROM debian:buster-slim
 
 # Install TinyTex for Latex compiler
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y && \
-    apt-get install -y perl wget libfontconfig1 && \
-    wget -qO- "https://yihui.name/gh/tinytex/tools/install-unx.sh" | sh  && \
+    apt-get install -y ca-certificates perl libfontconfig1 wget && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-ENV PATH="${PATH}:/root/bin"
-RUN fmtutil-sys --all
-
 WORKDIR /app
-# Download altacv class from the author github
-RUN wget -q "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"
-# Download missing class
-RUN wget -q "http://tug.ctan.org/tex-archive/macros/latex/contrib/extsizes/extarticle.cls"
-# Update tlmgr
-RUN tlmgr update --self
-# install only the packages you need
-RUN tlmgr install pgf fontawesome5 koma-script cmap ragged2e everysel tcolorbox \
-    enumitem ifmtarg dashrule changepage multirow environ paracol lato \
-    fontaxes accsupp tikzfill
 
-COPY --from=builder /app/api /app/api
+COPY --from=builder /app/cv-generator /app/cv-generator
 COPY --from=node_builder /app/build/ /app/build/
-RUN chmod +x ./api
+RUN chmod +x ./cv-generator
 COPY examples ./examples/
 COPY templates ./templates/
-COPY scripts/run.sh ./
 
-RUN chmod +x run.sh
-RUN ./run.sh
-CMD ["/app/api", "serve"]
+RUN ./cv-generator install
+ENV PATH="${PATH}:/root/bin"
 
+ENTRYPOINT ["/app/cv-generator"]

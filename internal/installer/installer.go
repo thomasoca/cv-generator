@@ -98,8 +98,7 @@ func InstallPrerequisite() error {
 			packages := []string{
 				"pgf", "fontawesome5", "koma-script", "cmap", "ragged2e", "everysel",
 				"tcolorbox", "enumitem", "ifmtarg", "dashrule", "changepage", "multirow",
-				"environ", "paracol", "lato", "fontaxes", "accsupp", "extsizes", "pdfx",
-				"colorprofiles", "xmpincl", "adjustbox", "collectbox",
+				"environ", "paracol", "lato", "fontaxes", "accsupp", "tikzfill",
 			}
 			if err := utils.RunCommand("tlmgr", nil, nil, append([]string{"install"}, packages...)...); err != nil {
 				fmt.Println("Failed to install packages:", err)
