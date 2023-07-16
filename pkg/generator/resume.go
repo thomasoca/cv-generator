@@ -5,6 +5,8 @@ import (
 	"errors"
 	"log"
 	"os/exec"
+
+	"github.com/thomasoca/cv-generator/pkg/utils"
 )
 
 func createResumeFile(fg FileGenerator) error {
@@ -27,15 +29,9 @@ func createResumeFile(fg FileGenerator) error {
 }
 
 func CheckVersion() error {
-	var stderr bytes.Buffer
-	var out bytes.Buffer
-	cmd := exec.Command("pdflatex", "--version")
-	cmd.Stdout = &out
-	cmd.Stderr = &stderr
-	err := cmd.Run()
+	err := utils.RunCommand("pdflatex", "version")
 	if err != nil {
 		log.Printf("Command finished with error: %v", err)
-		log.Println(out.String())
 		return errors.New("latex backend not available")
 	}
 	return err
