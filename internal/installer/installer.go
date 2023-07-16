@@ -41,6 +41,7 @@ func InstallPrerequisite() error {
 	// Check if latex class is already in the machine
 	listOfClasses := []map[string]string{
 		{"class": "altacv.cls", "url": "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"},
+		{"class": "extarticle.cls", "url": "http://tug.ctan.org/tex-archive/macros/latex/contrib/extsizes/extarticle.cls"},
 	}
 
 	fmt.Println("Checking Latex class availability....")
