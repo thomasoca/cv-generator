@@ -28,6 +28,15 @@ func downloadFile(url, filePath string) error {
 	return err
 }
 
+func latexClassMod(class string) error {
+	switch class {
+	case "altacv.cls":
+		err := utils.AltaCvMod()
+		return err
+	}
+	return nil
+}
+
 func InstallPrerequisite() error {
 	// Check if latex class is already in the machine
 	listOfClasses := []map[string]string{
@@ -42,6 +51,11 @@ func InstallPrerequisite() error {
 			// Download latex class from the author Git repository
 			if err := downloadFile(url, class); err != nil {
 				fmt.Println("Failed to download latex class:", err)
+				return err
+			}
+			// Apply mod to the Latex class
+			if err := latexClassMod(class); err != nil {
+				fmt.Println("Failed to apply mod to the Latex class:", err)
 				return err
 			}
 			fmt.Printf("%s downloaded successfully.\n", class)
