@@ -28,6 +28,7 @@ FROM debian:buster-slim
 # Install TinyTex for Latex compiler
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y && \
     apt-get install -y ca-certificates perl libfontconfig1 wget && \
+    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
