@@ -73,6 +73,7 @@ func InstallPrerequisite() error {
 			// Download TinyTex for minimal latex installation
 			tinyTexURL := "https://yihui.org/tinytex/install-bin-unix.sh"
 			if !image.IsImageFileExist("install-bin-unix.sh") {
+				fmt.Println("Downloading TinyTex installer...")
 				if err := downloadFile(tinyTexURL, "install-bin-unix.sh"); err != nil {
 					fmt.Println("Failed to download install-bin-unix.sh:", err)
 					return err

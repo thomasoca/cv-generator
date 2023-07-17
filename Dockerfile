@@ -28,12 +28,11 @@ FROM debian:buster-slim
 # Install TinyTex for Latex compiler
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y && \
     apt-get install -y ca-certificates perl libfontconfig1 wget && \
-    wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
-
+RUN wget -q "https://yihui.org/tinytex/install-bin-unix.sh"
 COPY --from=builder /app/cv-generator /app/cv-generator
 COPY --from=node_builder /app/build/ /app/build/
 RUN chmod +x ./cv-generator
