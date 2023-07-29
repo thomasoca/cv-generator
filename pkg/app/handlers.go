@@ -1,6 +1,7 @@
 package app
 
 import (
+	"bytes"
 	"encoding/json"
 	"io"
 	"log"
@@ -122,8 +123,12 @@ func (h *HttpHandlers) HealthCheckHandler(w http.ResponseWriter, r *http.Request
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	err := generator.CheckVersion()
+	var stderr bytes.Buffer
+	var stdout bytes.Buffer
+	err := utils.RunCommand("pdflatex", &stdout, &stderr, "-version")
 	if err != nil {
+		log.Printf("Command finished with error: %v", err)
+		log.Println(stdout.String())
 		log.Printf("Server is not healthy")
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Header().Set("Content-type", "application/json")

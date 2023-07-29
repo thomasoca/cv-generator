@@ -23,16 +23,3 @@ func createResumeFile(fg FileGenerator) error {
 	log.Println("Latex file generated successfully")
 	return err
 }
-
-func CheckVersion() error {
-
-	var stderr bytes.Buffer
-	var stdout bytes.Buffer
-	err := utils.RunCommand("pdflatex", &stdout, &stderr, "-version")
-	if err != nil {
-		log.Printf("Command finished with error: %v", err)
-		log.Println(stdout.String())
-		return errors.New("latex backend not available")
-	}
-	return err
-}

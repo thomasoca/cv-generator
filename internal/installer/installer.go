@@ -39,10 +39,7 @@ func latexClassMod(class string) error {
 
 func InstallPrerequisite() error {
 	// Check if latex class is already in the machine
-	listOfClasses := []map[string]string{
-		{"class": "altacv.cls", "url": "https://raw.githubusercontent.com/liantze/AltaCV/main/altacv.cls"},
-		{"class": "extarticle.cls", "url": "http://tug.ctan.org/tex-archive/macros/latex/contrib/extsizes/extarticle.cls"},
-	}
+	listOfClasses := GetLatexClass()
 
 	fmt.Println("Checking Latex class availability....")
 	for _, m := range listOfClasses {
@@ -98,11 +95,7 @@ func InstallPrerequisite() error {
 
 			// Install the necessary packages
 			fmt.Println("Installing necessary Latex packages....")
-			packages := []string{
-				"pgf", "fontawesome5", "koma-script", "cmap", "ragged2e", "everysel",
-				"tcolorbox", "enumitem", "ifmtarg", "dashrule", "changepage", "multirow",
-				"environ", "paracol", "lato", "fontaxes", "accsupp", "tikzfill",
-			}
+			packages := GetPackageList()
 			if err := utils.RunCommand("tlmgr", nil, nil, append([]string{"install"}, packages...)...); err != nil {
 				fmt.Println("Failed to install packages:", err)
 				return err

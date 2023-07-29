@@ -56,8 +56,8 @@ Optional flags:
 Make sure to install Docker in your system
 
 1. Pull the latest image from the registry by running `docker pull ghcr.io/thomasoca/cv-generator:latest`
-2. To run the image as web server, bind the port, i.e. on port 8170 and run `docker run -p 8170:8170 cv-generator serve`
-3. To run the image as local file generator, simply run `docker run cv-generator generate --input [INPUT_FILE] --output [OUTPUT_FILE]`
+2. To run the image as web server, bind the port, i.e. on port 8170 and run `docker run -p 8170:8170 ghcr.io/thomasoca/cv-generator serve`
+3. To run the image as local file generator, simply run `docker run -v [LOCAL_DIR]:[OUTPUT_DIRECTORY] ghcr.io/thomasoca/cv-generator generate --input [INPUT_FILE] --output [OUTPUT_FILE]`
 
 ### Local Installation
 #### Installation from source 
