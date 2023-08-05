@@ -128,7 +128,7 @@
 {{if $i}}
 \divider
 {{end}}
-\cvevent{{"{"}}{{replaceUnescapedChar .Position}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Company}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\cvevent{{"{"}}{{replaceUnescapedChar .Position}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Company}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Location}}{{"}"}}
 {{if $it.Descriptions}}
 \begin{itemize}
 {{range $it.Descriptions}}
@@ -145,7 +145,7 @@
 {{if $i}}
 \divider
 {{end}}
-\cvevent{{"{"}}{{.Level}}, {{.Major}}{{if .Gpa}}, {{.Gpa}}{{end}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\cvevent{{"{"}}{{.Level}}, {{replaceUnescapedChar .Major}}{{if .Gpa}}, {{.Gpa}}{{end}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Location}}{{"}"}}
 {{if $it.Descriptions}}
 \begin{itemize}
 {{range $it.Descriptions}}
@@ -162,7 +162,7 @@
 {{if $i}}
 \divider
 {{end}}
-\cvevent{{"{"}}{{replaceUnescapedChar .Position}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{.Location}}{{"}"}}
+\cvevent{{"{"}}{{replaceUnescapedChar .Position}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Institution}}{{"}"}}{{"{"}}{{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}{{"{"}}{{replaceUnescapedChar .Location}}{{"}"}}
 {{if $it.Descriptions}}
 \begin{itemize}
 {{range $it.Descriptions}}
