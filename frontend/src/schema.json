@@ -40,6 +40,10 @@
         "twitter": {
           "type": "string",
           "description": "@jane"
+        },
+        "picture": {
+          "type": "string",
+          "title": "Upload Profile Picture"
         }
       }
     },

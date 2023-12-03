@@ -23,12 +23,15 @@ import {
   KeyboardArrowRight,
   GetApp,
 } from "@material-ui/icons";
+import ImageUploadControl, {
+  ImageUploadControlTester,
+} from "./ImageUploadControl";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 const renderers = [
   ...materialRenderers,
   //register custom renderers
-  //{ tester: ratingControlTester, renderer: RatingControl },
+  { tester: ImageUploadControlTester, renderer: ImageUploadControl },
 ];
 const useStyles = makeStyles((theme) => ({
   root: {
