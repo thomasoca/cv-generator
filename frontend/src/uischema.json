@@ -64,6 +64,16 @@
               "scope": "#/properties/personal_info/properties/github"
             }
           ]
+        },
+        {
+          "type": "HorizontalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "label": "Profile Picture",
+              "scope": "#/properties/personal_info/properties/picture"
+            }
+          ]
         }
       ]
     },

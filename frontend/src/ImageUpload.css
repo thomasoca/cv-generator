@@ -1,0 +1,14 @@
+.icon-button-photo {
+  width: 100%;
+  border-radius: 5px;
+  background-color: aliceblue;
+  display: block;
+  text-align: center;
+  box-shadow: 2px 2px 2px 1px rgba(191, 191, 255, 0.2);
+  margin-bottom: 10px;
+}
+.para {
+  font-size: 18px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  color: #777;
+}
