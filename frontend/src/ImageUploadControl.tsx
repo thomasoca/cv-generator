@@ -1,6 +1,6 @@
 import { withJsonFormsControlProps } from "@jsonforms/react";
 import ImageUpload from "./ImageUpload"; // Assuming you have an ImageUpload component
-import { rankWith, scopeEndsWith } from "@jsonforms/core";
+import { rankWith, scopeEndsWith, ControlProps } from "@jsonforms/core";
 
 interface ImageUploadControlTesterProps {
   uischema: any;
@@ -16,6 +16,7 @@ interface NewHandleChangeProps {
 interface ImageUploadControlProps {
   data: any;
   path: string;
+  label: string;
   handleChange(path: string, value: any): void;
 }
 
@@ -36,7 +37,8 @@ const ImageUploadControl = ({
   data,
   handleChange,
   path,
-}: ImageUploadControlProps) => (
+  label,
+}: ControlProps) => (
   <ImageUpload
     updateValue={(newValue: string) =>
       newHandleChange({ handleChange, path, newValue })

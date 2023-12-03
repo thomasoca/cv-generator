@@ -42,7 +42,8 @@
           "description": "@jane"
         },
         "picture": {
-          "type": "string"
+          "type": "string",
+          "title": "Upload Profile Picture"
         }
       }
     },
