@@ -17,7 +17,7 @@
           "type": "string",
           "description": "jane.doe@email.com"
         },
-        "phone_number": {
+        "phone": {
           "type": "string",
           "description": "Any phone format, e.g. 12344555"
         },

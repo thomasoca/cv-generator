@@ -27,7 +27,7 @@
             },
             {
               "type": "Control",
-              "scope": "#/properties/personal_info/properties/phone_number"
+              "scope": "#/properties/personal_info/properties/phone"
             }
           ]
         },
