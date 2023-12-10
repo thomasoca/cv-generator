@@ -181,10 +181,6 @@
                       "scope": "#/properties/institution"
                     },
                     {
-                      "type": "Control",
-                      "scope": "#/properties/major"
-                    },
-                    {
                       "type": "HorizontalLayout",
                       "elements": [
                         {
