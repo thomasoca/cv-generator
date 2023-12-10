@@ -8,7 +8,7 @@ var classes = []map[string]string{
 var packageList = []string{
 	"pgf", "fontawesome5", "koma-script", "cmap", "ragged2e", "everysel",
 	"tcolorbox", "enumitem", "ifmtarg", "dashrule", "changepage", "multirow",
-	"environ", "paracol", "lato", "fontaxes", "accsupp", "tikzfill",
+	"environ", "paracol", "lato", "fontaxes", "accsupp", "tikzfill", "hyperref",
 }
 
 func GetPackageList() []string {

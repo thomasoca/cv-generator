@@ -46,7 +46,9 @@ func AltaCvMod() error {
 			}
 		}
 		if keepLine {
-			fmt.Fprintln(file, line)
+			// Replace pdfstringdef method to escape
+			newLine := strings.Replace(line, "pdfstringdef", "escape", -1)
+			fmt.Fprintln(file, newLine)
 		}
 	}
 

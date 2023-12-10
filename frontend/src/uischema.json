@@ -27,7 +27,7 @@
             },
             {
               "type": "Control",
-              "scope": "#/properties/personal_info/properties/phone_number"
+              "scope": "#/properties/personal_info/properties/phone"
             }
           ]
         },
@@ -179,10 +179,6 @@
                     {
                       "type": "Control",
                       "scope": "#/properties/institution"
-                    },
-                    {
-                      "type": "Control",
-                      "scope": "#/properties/major"
                     },
                     {
                       "type": "HorizontalLayout",
