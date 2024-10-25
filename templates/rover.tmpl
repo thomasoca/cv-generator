@@ -1,0 +1,138 @@
+%-------------------------
+% Rover Resume - Base Template
+% Link: https://github.com/subidit/rover-resume
+%
+% Shows code for various formatting options for different resume sections.
+% Education and Projects have single-line headers; while Experience uses double-line.
+% Some formatting codes are kept inline; consider \newcommand{cmd}{def}.
+% Excludes hyperref and icons for readability; MVP version.
+% Explore other templates for more options.
+% Mix and match as desired. Be consistent with headers and sub-headers.
+%------------------------
+
+\documentclass[10pt]{article} % fontsize 10pt/11pt/12pt
+
+\usepackage[margin=0.5in, a4paper]{geometry}
+\setcounter{secnumdepth}{0} % remove section numbering
+\usepackage{titlesec}
+\titlespacing{\subsection}{0pt}{*0}{*0} % remove vertical spacing above and below
+\titlespacing{\subsubsection}{0pt}{*0}{*0}
+\titleformat{\section}{\large\bfseries\uppercase}{}{}{}[\titlerule]
+\titleformat*{\subsubsection}{\large\itshape}
+\usepackage{enumitem}
+\setlist[itemize]{noitemsep,left=0pt .. \parindent}
+\pagestyle{empty} % remove page number
+\pdfgentounicode=1
+
+
+\begin{document}
+
+\begin{center}
+		{\Huge\bfseries
+			{{.PersonalInfo.Name}} % Name Here
+		} \\ \medskip
+		{\bfseries
+     {{.PersonalInfo.Headline}} 
+    } \\ \medskip % Title [optional]
+		Email: {{.PersonalInfo.Email}} \quad
+		Mobile: {{.PersonalInfo.Phone}} \quad
+    {{- if .PersonalInfo.Location1}}
+    Address: {{"{"}}{{.PersonalInfo.Location1}}{{"}"}} 
+    {{- end}}
+    {{- if .PersonalInfo.Linkedin}}
+		LinkedIn: {{.PersonalInfo.Linkedin}} \quad
+    {{- end}}
+    {{- if .PersonalInfo.Github}}
+		GitHub: {{.PersonalInfo.Github}}
+    {{- end}}
+\end{center}
+
+
+\section{{"{"}}{{.MainSection.AboutMe.Label}}{{"}"}}
+{{replaceUnescapedChar .MainSection.AboutMe.Descriptions}}
+
+\section{{"{"}}{{.MainSection.WorkExperience.Label}}{{"}"}}
+%=================%
+{{range $i, $it := .MainSection.WorkExperience.Lists}}
+\subsection{{"{"}}{{replaceUnescapedChar .Position}} \hfill {{.StartPeriod}} -- {{.EndPeriod}} {{"}"}}
+\subsubsection{{"{"}}{{replaceUnescapedChar .Company}} \hfill {{replaceUnescapedChar .Location}} {{"}"}}
+{{if $it.Descriptions}}
+\begin{itemize}
+{{range $it.Descriptions}}
+\item {{replaceUnescapedChar .}}
+{{end}}
+\end{itemize}
+{{end}}
+{{end}} 
+
+\section{{"{"}}{{.MainSection.Education.Label}}{{"}"}}
+%=================%
+{{if .MainSection.Education.Lists}}
+{{range $i, $it := .MainSection.Education.Lists}}
+{{if $i}}
+\medskip
+{{end}}
+\subsection{{"{"}}{{.Level}}, {{replaceUnescapedChar .Major}}{{if .Gpa}}, {{.Gpa}}{{end}} \hfill  {{.StartPeriod}} -- {{.EndPeriod}} {{"}"}}
+\subsubsection{{"{"}}{{replaceUnescapedChar .Institution}} \hfill  {{replaceUnescapedChar .Location}}{{"}"}}
+{{if $it.Descriptions}}
+\begin{itemize}
+{{range $it.Descriptions}}
+\item {{replaceUnescapedChar .}}
+{{end}}
+\end{itemize}
+{{end}}
+{{end}}
+{{end}}
+
+\medskip
+{{if .MainSection.Extracurricular.Lists}}
+\section{{"{"}}{{.MainSection.Extracurricular.Label}}{{"}"}}
+%===============================%
+
+{{range $i, $it := .MainSection.Extracurricular.Lists}}
+\subsection{{"{"}}{{replaceUnescapedChar .Position}} \hfill  {{.StartPeriod}} -- {{.EndPeriod}} {{"}"}}
+\subsubsection{{"{"}}{{replaceUnescapedChar .Institution}} \hfill {{replaceUnescapedChar .Location}}{{"}"}}
+{{if $it.Descriptions}}
+\begin{itemize}
+{{range $it.Descriptions}}
+\item {{replaceUnescapedChar .}}
+{{end}}
+\end{itemize}
+{{end}}
+{{end}}
+{{end}} 
+
+
+\section{{"{"}}{{.MainSection.Skills.Label}}{{"}"}}
+%===========================%
+
+\begin{description}[itemsep=0pt]
+  \item[Technical]
+  {{- range $i, $it := .MainSection.Skills.Descriptions}}
+  {{- if $i }}, {{ end -}}
+   {{replaceUnescapedChar . -}}
+  {{- end}}
+  \item[{{.MainSection.Languages.Label}}] 
+  {{- range $i, $it := .MainSection.Languages.Descriptions}}
+  {{- if $i }}, {{ end -}}
+   {{.Language}} -- {{.Fluency -}}
+  {{- end}}
+\end{description}
+
+{{if .MainSection.Projects.Lists}}
+\section{{"{"}}{{.MainSection.Projects.Label}}{{"}"}}
+%=================
+{{- range $i, $it := .MainSection.Projects.Lists}}
+{{- if $i}}
+\medskip
+{{end}}
+\subsection{{"{"}}{{replaceUnescapedChar .Title}} \normalfont\textit{{"{"}}{{replaceUnescapedChar .Link}}{{"}"}} \hfill {{.StartPeriod}} -- {{.EndPeriod}}{{"}"}}
+{{- if $it.Descriptions}}
+\begin{itemize}
+\item {{replaceUnescapedChar $it.Descriptions}}
+\end{itemize}
+{{- end}}
+{{- end}}
+{{end}}
+
+\end{document}

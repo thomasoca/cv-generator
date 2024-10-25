@@ -28,8 +28,8 @@ func createLatexFile(fg FileGenerator) error {
 	if err != nil {
 		return err
 	}
-	templatePath := path + "/templates/template.tmpl"
-	tpl, err := template.New("template.tmpl").Funcs(template.FuncMap{"replaceUnescapedChar": replaceUnescapedChar}).ParseFiles(templatePath)
+	templatePath := path + "/templates/rover.tmpl"
+	tpl, err := template.New("rover.tmpl").Funcs(template.FuncMap{"replaceUnescapedChar": replaceUnescapedChar}).ParseFiles(templatePath)
 	if err != nil {
 		return err
 	}
