@@ -8,6 +8,7 @@ import (
 
 // User type, based on the JSON input from the client
 type User struct {
+	Template     string `json:"template"`
 	PersonalInfo struct {
 		Name      string `json:"name"`
 		Headline  string `json:"headline"`
