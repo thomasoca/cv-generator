@@ -1,6 +1,6 @@
 # cv-generator
 
-A web app and CLI tool to generate beautiful LaTeX resume using available open source templates by filling a simple form (or using a JSON file in CLI mode).
+A web app and CLI tool to generate beautiful, ATS-friendly LaTeX resume using available open source templates by filling a simple form (or using a JSON file in CLI mode).
 
 ## Live website
 
@@ -9,6 +9,7 @@ https://cv-generator-40m5.onrender.com
 ## Available templates
 
 - A slightly modified [AltaCV](https://github.com/liantze/AltaCV). The original altacv latex class was written by LianTze Lim (liantze@gmail.com).
+- Base [Rover Resume](https://github.com/subidit/rover-resume), originally created by [subidit](https://github.com/subidit/)
 
 ### Template Modifications
 
