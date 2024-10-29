@@ -3,6 +3,21 @@
   "elements": [
     {
       "type": "Category",
+      "label": "Template",
+      "elements": [
+        {
+          "type": "HorizontalLayout",
+          "elements": [
+            {
+              "type": "Control",
+              "scope": "#/properties/template"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Category",
       "label": "Personal Info",
       "elements": [
         {

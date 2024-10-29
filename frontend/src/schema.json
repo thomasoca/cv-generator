@@ -1,6 +1,10 @@
 {
   "type": "object",
   "properties": {
+    "template": {
+      "type": "string",
+      "enum": ["altacv", "rover"]
+    },
     "personal_info": {
       "type": "object",
       "properties": {
