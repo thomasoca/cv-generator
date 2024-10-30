@@ -34,16 +34,22 @@
 		{\bfseries
      {{.PersonalInfo.Headline}} 
     } \\ \medskip % Title [optional]
-		Email: {{.PersonalInfo.Email}} \quad
-		Mobile: {{.PersonalInfo.Phone}} \quad
+		{{.PersonalInfo.Email}} \quad
+		{{.PersonalInfo.Phone}} \quad
     {{- if .PersonalInfo.Location1}}
-    Address: {{"{"}}{{.PersonalInfo.Location1}}{{"}"}} 
+    {{.PersonalInfo.Location1}}  
+    {{- end}}
+    {{- if .PersonalInfo.Location2}}
+    {{.PersonalInfo.Location2}}  
     {{- end}}
     {{- if .PersonalInfo.Linkedin}}
-		LinkedIn: {{.PersonalInfo.Linkedin}} \quad
+		{{.PersonalInfo.Linkedin}} \quad
     {{- end}}
     {{- if .PersonalInfo.Github}}
-		GitHub: {{.PersonalInfo.Github}}
+		{{.PersonalInfo.Github}} \quad
+    {{- end}}
+    {{- if .PersonalInfo.Twitter}}
+    {{.PersonalInfo.Twitter}} \quad
     {{- end}}
 \end{center}
 
@@ -54,6 +60,9 @@
 \section{{"{"}}{{.MainSection.WorkExperience.Label}}{{"}"}}
 %=================%
 {{range $i, $it := .MainSection.WorkExperience.Lists}}
+{{if $i}}
+\medskip
+{{end}}
 \subsection{{"{"}}{{replaceUnescapedChar .Position}} \hfill {{.StartPeriod}} -- {{.EndPeriod}} {{"}"}}
 \subsubsection{{"{"}}{{replaceUnescapedChar .Company}} \hfill {{replaceUnescapedChar .Location}} {{"}"}}
 {{if $it.Descriptions}}
