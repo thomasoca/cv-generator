@@ -123,7 +123,7 @@
 \begin{paracol}{2}
 
 {{if .MainSection.WorkExperience.Lists}}
-\cvsection{{"{"}}{{.MainSection.WorkExperience.Label}}{{"}"}}
+\cvsection{{"{"}}{{replaceUnescapedChar .MainSection.WorkExperience.Label}}{{"}"}}
 {{range $i, $it := .MainSection.WorkExperience.Lists}}
 {{if $i}}
 \divider
@@ -139,7 +139,7 @@
 {{end}}
 {{end}}
 
-\cvsection{{"{"}}{{.MainSection.Education.Label}}{{"}"}}
+\cvsection{{"{"}}{{replaceUnescapedChar .MainSection.Education.Label}}{{"}"}}
 {{if .MainSection.Education.Lists}}
 {{range $i, $it := .MainSection.Education.Lists}}
 {{if $i}}
@@ -157,7 +157,7 @@
 {{end}}
 
 {{if .MainSection.Extracurricular.Lists}}
-\cvsection{{"{"}}{{.MainSection.Extracurricular.Label}}{{"}"}}
+\cvsection{{"{"}}{{replaceUnescapedChar .MainSection.Extracurricular.Label}}{{"}"}}
 {{range $i, $it := .MainSection.Extracurricular.Lists}}
 {{if $i}}
 \divider
@@ -180,7 +180,7 @@
 \end{quote}
 
 {{if .MainSection.Projects.Lists}}
-\cvsection{{"{"}}{{.MainSection.Projects.Label}}{{"}"}}
+\cvsection{{"{"}}{{replaceUnescapedChar .MainSection.Projects.Label}}{{"}"}}
 {{range $i, $it := .MainSection.Projects.Lists}}
 {{if $i}}
 \divider
@@ -192,12 +192,12 @@
 {{end}}
 {{end}}
 
-\cvsection{{"{"}}{{.MainSection.Skills.Label}}{{"}"}}
+\cvsection{{"{"}}{{replaceUnescapedChar .MainSection.Skills.Label}}{{"}"}}
 {{- range .MainSection.Skills.Descriptions}}
 \cvtag{{"{"}}{{replaceUnescapedChar . -}}{{"}"}}
 {{- end}}
 
-\cvsection{{"{"}}{{.MainSection.Languages.Label}}{{"}"}}
+\cvsection{{"{"}}{{replaceUnescapedChar .MainSection.Languages.Label}}{{"}"}}
 {{range .MainSection.Languages.Descriptions}}
 \cvskillstr{{"{"}}{{.Language}}{{"}"}}{{"{"}}{{.Fluency}}{{"}"}}
 {{end}}
