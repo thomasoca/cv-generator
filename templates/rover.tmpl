@@ -37,10 +37,10 @@
 		{{.PersonalInfo.Email}} \quad
 		{{.PersonalInfo.Phone}} \quad
     {{- if .PersonalInfo.Location1}}
-    {{.PersonalInfo.Location1}}  
+    {{.PersonalInfo.Location1}} \quad 
     {{- end}}
     {{- if .PersonalInfo.Location2}}
-    {{.PersonalInfo.Location2}}  
+    {{.PersonalInfo.Location2}} \quad
     {{- end}}
     {{- if .PersonalInfo.Linkedin}}
 		{{.PersonalInfo.Linkedin}} \quad
@@ -54,10 +54,10 @@
 \end{center}
 
 
-\section{{"{"}}{{.MainSection.AboutMe.Label}}{{"}"}}
+\section{{"{"}}{{replaceUnescapedChar .MainSection.AboutMe.Label}}{{"}"}}
 {{replaceUnescapedChar .MainSection.AboutMe.Descriptions}}
 
-\section{{"{"}}{{.MainSection.WorkExperience.Label}}{{"}"}}
+\section{{"{"}}{{replaceUnescapedChar .MainSection.WorkExperience.Label}}{{"}"}}
 %=================%
 {{range $i, $it := .MainSection.WorkExperience.Lists}}
 {{if $i}}
@@ -74,7 +74,7 @@
 {{end}}
 {{end}} 
 
-\section{{"{"}}{{.MainSection.Education.Label}}{{"}"}}
+\section{{"{"}}{{replaceUnescapedChar .MainSection.Education.Label}}{{"}"}}
 %=================%
 {{if .MainSection.Education.Lists}}
 {{range $i, $it := .MainSection.Education.Lists}}
@@ -95,7 +95,7 @@
 
 \medskip
 {{if .MainSection.Extracurricular.Lists}}
-\section{{"{"}}{{.MainSection.Extracurricular.Label}}{{"}"}}
+\section{{"{"}}{{replaceUnescapedChar .MainSection.Extracurricular.Label}}{{"}"}}
 %===============================%
 
 {{range $i, $it := .MainSection.Extracurricular.Lists}}
@@ -112,7 +112,7 @@
 {{end}} 
 
 
-\section{{"{"}}{{.MainSection.Skills.Label}}{{"}"}}
+\section{{"{"}}{{replaceUnescapedChar .MainSection.Skills.Label}}{{"}"}}
 %===========================%
 
 \begin{description}[itemsep=0pt]
@@ -129,7 +129,7 @@
 \end{description}
 
 {{if .MainSection.Projects.Lists}}
-\section{{"{"}}{{.MainSection.Projects.Label}}{{"}"}}
+\section{{"{"}}{{replaceUnescapedChar .MainSection.Projects.Label}}{{"}"}}
 %=================
 {{- range $i, $it := .MainSection.Projects.Lists}}
 {{- if $i}}
