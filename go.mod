@@ -1,6 +1,6 @@
 module github.com/thomasoca/cv-generator
 
-go 1.19
+go 1.25
 
 require github.com/spf13/cobra v1.6.1
 

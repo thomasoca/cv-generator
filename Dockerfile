@@ -1,5 +1,5 @@
 # Build the Go cv-generator
-FROM golang:1.19-buster as builder
+FROM golang:1.25-trixie as builder
 
 WORKDIR /app
 
