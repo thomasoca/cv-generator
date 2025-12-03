@@ -23,7 +23,7 @@ COPY ./frontend/ /app/
 RUN npm run build
 
 # Production container
-FROM debian:buster-slim
+FROM debian:trixie-slim
 
 # Install TinyTex for Latex compiler
 RUN set -x && apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y && \
