@@ -6,6 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import TextField from "@mui/material/TextField"; // Import TextField for better JSON input styling
 import "./App.css";
 import Header from "./Header";
 import Footer from "./Footer";
@@ -74,13 +79,38 @@ const App = () => {
   const [pdfBlob, setPdfBlob] = useState<Blob | null>(null);
   const [numPages, setNumPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [jsonInput, setJsonInput] = useState<string>("");
+  const [jsonInputError, setJsonInputError] = useState<string | undefined>(
+    undefined,
+  );
+  const [jsonAccordionExpanded, setJsonAccordionExpanded] = useState(false); // State for JSON input accordion
+
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify(jsonformsData, null, 2));
     setDisplayDataAsString(JSON.stringify(jsonformsData, null, 2));
+    // When jsonformsData changes, update the jsonInput field as well to reflect the current state
+    setJsonInput(JSON.stringify(jsonformsData, null, 2));
   }, [jsonformsData]);
 
   const clearData = () => {
     setJsonformsData({});
+  };
+
+  const handleJsonInputChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setJsonInput(event.target.value);
+    setJsonInputError(undefined); // Clear previous error on new input
+  };
+
+  const parseAndSetJsonData = () => {
+    try {
+      const parsedData = JSON.parse(jsonInput);
+      setJsonformsData(parsedData);
+      setJsonInputError(undefined);
+    } catch (e: any) {
+      setJsonInputError("Invalid JSON: " + e.message);
+    }
   };
 
   const downloadObject = async (): Promise<void> => {
@@ -175,12 +205,72 @@ const App = () => {
                       onChange={({ errors, data }) => {
                         setJsonformsData(data);
                         setError(
-                          errors?.map((err) => err.message)[errors.length - 1]
+                          errors?.map((err) => err.message)[errors.length - 1],
                         );
                       }}
                     />
                   </div>
-                  <Grid item sm={10}>
+                  <Grid item sm={12}>
+                    <Accordion
+                      expanded={jsonAccordionExpanded}
+                      onChange={() =>
+                        setJsonAccordionExpanded(!jsonAccordionExpanded)
+                      }
+                      sx={{ marginTop: "1em" }}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography variant="h6">
+                          Toggle to paste JSON data
+                        </Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <TextField
+                          label="JSON Input"
+                          multiline
+                          rows={10}
+                          value={jsonInput}
+                          onChange={(e) =>
+                            handleJsonInputChange(
+                              e as React.ChangeEvent<HTMLTextAreaElement>,
+                            )
+                          }
+                          fullWidth
+                          variant="outlined"
+                          placeholder="Paste your JSON data here..."
+                          sx={{ fontFamily: "monospace", marginBottom: "1em" }}
+                        />
+                        {jsonInputError && (
+                          <Alert
+                            severity="error"
+                            onClose={() => setJsonInputError(undefined)}
+                            sx={{ marginBottom: "1em" }}
+                          >
+                            <AlertTitle>JSON Error</AlertTitle>
+                            {jsonInputError}
+                          </Alert>
+                        )}
+                        <Button
+                          className="parsejsonbutton"
+                          onClick={parseAndSetJsonData}
+                          color="secondary"
+                          variant="contained"
+                          sx={{ marginRight: "8px" }}
+                        >
+                          Parse JSON
+                        </Button>
+                      </AccordionDetails>
+                    </Accordion>
+                  </Grid>
+                  <Grid
+                    item
+                    sm={12}
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      gap: "8px",
+                      marginTop: "1em", // Add some margin to separate from the accordion
+                    }}
+                  >
                     <Button
                       className="resetbutton"
                       onClick={downloadObject}
@@ -189,7 +279,6 @@ const App = () => {
                     >
                       Create your resume
                     </Button>
-                    &nbsp;
                     <Button
                       className="resetbutton"
                       onClick={clearData}
